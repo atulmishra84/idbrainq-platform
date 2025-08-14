@@ -5,15 +5,16 @@
       "serve": "/index.html"
     },
     {
-      "route": "/test",
-      "serve": "/test-simple.html"
-    },
-    {
       "route": "/*",
       "serve": "/index.html"
     }
   ],
   "navigationFallback": {
     "rewrite": "/index.html"
+  },
+  "responseOverrides": {
+    "404": {
+      "rewrite": "/index.html"
+    }
   }
 }
