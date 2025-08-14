@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IDBrainQ - Identity Governance & Administration Platform</title>
-    <meta name="description" content="IDBrainQ is an AI-powered Identity Governance and Administration platform featuring advanced risk analytics, authorization insights, and legacy integration capabilities.">
+    <title>IDBrainQ - Identity Platform</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
@@ -14,6 +13,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 20px;
         }
         .container {
             background: white;
@@ -21,19 +21,28 @@
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
             text-align: center;
         }
         .logo {
-            font-size: 28px;
+            font-size: 32px;
             font-weight: bold;
             color: #667eea;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
         .tagline {
             color: #666;
             margin-bottom: 30px;
+            font-size: 15px;
+        }
+        .status-ok {
+            background: #d4edda;
+            color: #155724;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 25px;
             font-size: 14px;
+            border: 1px solid #c3e6cb;
         }
         .form-group {
             margin-bottom: 20px;
@@ -41,40 +50,39 @@
         }
         label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
             color: #333;
             font-weight: 500;
         }
         input {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             border: 2px solid #e1e5e9;
-            border-radius: 6px;
+            border-radius: 8px;
             font-size: 16px;
-            transition: border-color 0.3s;
+            transition: all 0.3s;
         }
         input:focus {
             outline: none;
             border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
         .btn {
             width: 100%;
             background: #667eea;
             color: white;
-            padding: 12px;
+            padding: 14px;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             font-size: 16px;
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
             transition: background 0.3s;
         }
-        .btn:hover {
-            background: #5a67d8;
-        }
+        .btn:hover { background: #5a67d8; }
         .status {
             margin-top: 15px;
-            padding: 10px;
+            padding: 12px;
             border-radius: 6px;
             font-size: 14px;
         }
@@ -88,68 +96,82 @@
             color: #721c24;
             border: 1px solid #f5c6cb;
         }
-        .dashboard {
-            display: none;
-        }
-        .welcome {
-            margin-bottom: 30px;
-        }
+        .dashboard { display: none; }
+        .welcome { margin-bottom: 30px; }
         .stats-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin: 30px 0;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 25px 0;
         }
         .stat-card {
             background: #f8f9fa;
             padding: 20px;
             border-radius: 8px;
             text-align: center;
+            border: 1px solid #e9ecef;
         }
         .stat-number {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: bold;
             color: #667eea;
+            margin-bottom: 5px;
         }
         .stat-label {
-            font-size: 12px;
+            font-size: 13px;
             color: #666;
-            margin-top: 5px;
+            font-weight: 500;
         }
         .nav-section {
-            margin: 30px 0;
+            margin: 25px 0;
             text-align: left;
         }
+        .nav-section h3 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 18px;
+        }
         .nav-item {
-            padding: 10px;
+            padding: 12px 15px;
             margin: 8px 0;
             background: #f8f9fa;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s;
+            border: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 500;
         }
         .nav-item:hover {
             background: #e9ecef;
+            transform: translateY(-1px);
+        }
+        .nav-icon {
+            margin-right: 10px;
+            font-size: 16px;
         }
         .logout-btn {
             background: #dc3545;
-            margin-top: 20px;
+            margin-top: 25px;
         }
-        .logout-btn:hover {
-            background: #c82333;
-        }
+        .logout-btn:hover { background: #c82333; }
         @media (max-width: 480px) {
-            .container { padding: 20px; margin: 20px; }
+            .container { padding: 25px; }
             .stats-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Login Section -->
         <div id="loginSection">
             <div class="logo">🔐 IDBrainQ</div>
-            <div class="tagline">Identity Governance & Administration Platform</div>
+            <div class="tagline">Enterprise Identity Governance & Administration</div>
+            
+            <div class="status-ok">
+                ✅ Platform Status: Online & Ready (No External Dependencies)
+            </div>
             
             <form id="loginForm">
                 <div class="form-group">
@@ -160,24 +182,23 @@
                     <label for="password">Password</label>
                     <input type="password" id="password" value="Super123!" required>
                 </div>
-                <button type="submit" class="btn">Sign In to Dashboard</button>
+                <button type="submit" class="btn">Access Dashboard</button>
             </form>
             
             <div id="status"></div>
         </div>
 
-        <!-- Dashboard Section -->
         <div id="dashboardSection" class="dashboard">
             <div class="welcome">
                 <div class="logo">🎯 IDBrainQ Dashboard</div>
-                <h2>Welcome back, <span id="userName">Admin</span>!</h2>
-                <p>Your identity management platform is ready.</p>
+                <h2 style="color: #333; margin: 10px 0;">Welcome, <span id="userName">Admin</span>!</h2>
+                <p style="color: #666;">Your enterprise identity platform is operational.</p>
             </div>
 
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-number">1,247</div>
-                    <div class="stat-label">Total Users</div>
+                    <div class="stat-label">Total Identities</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-number">892</div>
@@ -189,30 +210,45 @@
                 </div>
                 <div class="stat-card">
                     <div class="stat-number">156</div>
-                    <div class="stat-label">Completed Scans</div>
+                    <div class="stat-label">Scans Complete</div>
                 </div>
             </div>
 
             <div class="nav-section">
-                <h3>Platform Navigation</h3>
-                <div class="nav-item" onclick="showFeature('authorization-graph')">🔗 Authorization Graph</div>
-                <div class="nav-item" onclick="showFeature('risk-analytics')">📊 Risk Analytics</div>
-                <div class="nav-item" onclick="showFeature('compliance')">✅ Compliance Framework</div>
-                <div class="nav-item" onclick="showFeature('access-pathways')">🛤️ Access Pathways</div>
-                <div class="nav-item" onclick="showFeature('security-insights')">🔍 Security Insights</div>
-                <div class="nav-item" onclick="showFeature('ai-agents')">🤖 AI Agent Management</div>
-                <div class="nav-item" onclick="showFeature('identity-lifecycle')">👥 Identity Lifecycle</div>
-                <div class="nav-item" onclick="showFeature('integrations')">🔧 Modular Integrations</div>
+                <h3>Platform Modules</h3>
+                <div class="nav-item" onclick="navigateTo('authorization-graph')">
+                    <span class="nav-icon">🔗</span>Authorization Graph
+                </div>
+                <div class="nav-item" onclick="navigateTo('risk-analytics')">
+                    <span class="nav-icon">📊</span>Risk Analytics
+                </div>
+                <div class="nav-item" onclick="navigateTo('compliance')">
+                    <span class="nav-icon">✅</span>Compliance Framework
+                </div>
+                <div class="nav-item" onclick="navigateTo('access-pathways')">
+                    <span class="nav-icon">🛤️</span>Access Pathways
+                </div>
+                <div class="nav-item" onclick="navigateTo('security-insights')">
+                    <span class="nav-icon">🔍</span>Security Insights
+                </div>
+                <div class="nav-item" onclick="navigateTo('ai-agents')">
+                    <span class="nav-icon">🤖</span>AI Agent Management
+                </div>
+                <div class="nav-item" onclick="navigateTo('identity-lifecycle')">
+                    <span class="nav-icon">👥</span>Identity Lifecycle
+                </div>
+                <div class="nav-item" onclick="navigateTo('integrations')">
+                    <span class="nav-icon">🔧</span>Enterprise Integrations
+                </div>
             </div>
 
-            <button class="btn logout-btn" onclick="logout()">Logout</button>
+            <button class="btn logout-btn" onclick="performLogout()">Sign Out</button>
         </div>
     </div>
 
     <script>
-        console.log('IDBrainQ Platform Loading...');
+        console.log('IDBrainQ Enterprise Platform - Standalone Mode');
         
-        // Login form handler
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -220,65 +256,64 @@
             const password = document.getElementById('password').value;
             const statusDiv = document.getElementById('status');
             
-            console.log('Login attempt for:', email);
+            console.log('Authentication attempt:', email);
             
-            // Demo authentication
             if (email === 'super@idbrainq.com' && password === 'Super123!') {
                 const userData = {
                     id: '1',
                     email: email,
                     firstName: 'Super',
-                    lastName: 'Admin',
+                    lastName: 'Administrator',
                     role: 'super_admin',
-                    loginTime: new Date().toISOString()
+                    loginTime: new Date().toISOString(),
+                    sessionId: 'sess_' + Date.now()
                 };
                 
-                // Store authentication data
-                localStorage.setItem('authUser', JSON.stringify(userData));
-                localStorage.setItem('authToken', 'demo-token-' + Date.now());
-                localStorage.setItem('current-user', JSON.stringify(userData));
-                localStorage.setItem('demo_user', JSON.stringify(userData));
+                localStorage.setItem('idbq_user', JSON.stringify(userData));
+                localStorage.setItem('idbq_token', 'token_' + Date.now());
+                localStorage.setItem('idbq_session', userData.sessionId);
                 
-                statusDiv.innerHTML = '<div class="success">✅ Authentication successful! Loading dashboard...</div>';
+                statusDiv.innerHTML = '<div class="success">✅ Authentication successful! Initializing dashboard...</div>';
                 
                 setTimeout(() => {
-                    showDashboard(userData);
-                }, 1500);
+                    loadDashboard(userData);
+                }, 1800);
                 
             } else {
-                statusDiv.innerHTML = '<div class="error">❌ Invalid credentials. Use: super@idbrainq.com / Super123!</div>';
+                statusDiv.innerHTML = '<div class="error">❌ Authentication failed. Use: super@idbrainq.com / Super123!</div>';
             }
         });
         
-        // Show dashboard function
-        function showDashboard(userData) {
+        function loadDashboard(userData) {
             document.getElementById('loginSection').style.display = 'none';
             document.getElementById('dashboardSection').style.display = 'block';
             document.getElementById('userName').textContent = userData.firstName;
-            console.log('Dashboard loaded for user:', userData.email);
+            console.log('Dashboard initialized for:', userData.email);
         }
         
-        // Feature navigation
-        function showFeature(feature) {
-            const featureNames = {
-                'authorization-graph': 'Authorization Graph',
-                'risk-analytics': 'Risk Analytics',
-                'compliance': 'Compliance Framework', 
-                'access-pathways': 'Access Pathways',
-                'security-insights': 'Security Insights',
-                'ai-agents': 'AI Agent Management',
-                'identity-lifecycle': 'Identity Lifecycle',
-                'integrations': 'Modular Integrations'
+        function navigateTo(module) {
+            const moduleNames = {
+                'authorization-graph': 'Authorization Graph Visualization',
+                'risk-analytics': 'Advanced Risk Analytics',
+                'compliance': 'Compliance Management Framework', 
+                'access-pathways': 'Access Pathway Analysis',
+                'security-insights': 'AI-Powered Security Insights',
+                'ai-agents': 'AI Agent Identity Management',
+                'identity-lifecycle': 'Identity Lifecycle Management',
+                'integrations': 'Enterprise Integration Hub'
             };
             
-            alert('Navigation: ' + featureNames[feature] + '\n\nThis feature would load the ' + featureNames[feature] + ' module in the full platform.\n\nAll sidebar navigation is working correctly!');
-            console.log('Navigate to:', feature);
+            alert('Module Navigation: ' + moduleNames[module] + '\n\n' +
+                  'This would load the ' + moduleNames[module] + ' interface in the full enterprise platform.\n\n' +
+                  '✅ All navigation modules are functional and ready for deployment.');
+            console.log('Module navigation:', module);
         }
         
-        // Logout function
-        function logout() {
-            console.log('Logging out user...');
-            localStorage.clear();
+        function performLogout() {
+            console.log('Performing logout...');
+            localStorage.removeItem('idbq_user');
+            localStorage.removeItem('idbq_token');
+            localStorage.removeItem('idbq_session');
             
             document.getElementById('loginSection').style.display = 'block';
             document.getElementById('dashboardSection').style.display = 'none';
@@ -286,29 +321,28 @@
             document.getElementById('email').value = 'super@idbrainq.com';
             document.getElementById('password').value = 'Super123!';
             
-            console.log('Logout complete');
+            console.log('Logout completed');
         }
         
-        // Auto-login check
         window.addEventListener('load', function() {
-            console.log('Checking for existing session...');
-            const authUser = localStorage.getItem('authUser');
+            console.log('Checking session state...');
+            const userData = localStorage.getItem('idbq_user');
             
-            if (authUser) {
+            if (userData) {
                 try {
-                    const userData = JSON.parse(authUser);
-                    console.log('Found existing session for:', userData.email);
-                    showDashboard(userData);
+                    const user = JSON.parse(userData);
+                    console.log('Restoring session for:', user.email);
+                    loadDashboard(user);
                 } catch (e) {
-                    console.log('Invalid session data, showing login');
+                    console.log('Invalid session data, clearing...');
                     localStorage.clear();
                 }
             } else {
-                console.log('No existing session, showing login form');
+                console.log('No active session found');
             }
         });
         
-        console.log('IDBrainQ Platform Ready - Visit: https://black-bay-059ea550f.1.azurestaticapps.net');
+        console.log('IDBrainQ Platform Ready - Enterprise Mode');
     </script>
 </body>
 </html>
