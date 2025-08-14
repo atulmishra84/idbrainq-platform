@@ -2,19 +2,19 @@
   "routes": [
     {
       "route": "/",
-      "serve": "/index.html"
+      "serve": "/debug-standalone.html"
     },
     {
       "route": "/*",
-      "serve": "/index.html"
+      "serve": "/debug-standalone.html"
     }
   ],
   "navigationFallback": {
-    "rewrite": "/index.html"
+    "rewrite": "/debug-standalone.html"
   },
   "responseOverrides": {
     "404": {
-      "rewrite": "/index.html"
+      "rewrite": "/debug-standalone.html"
     }
   }
 }
