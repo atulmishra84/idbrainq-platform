@@ -875,18 +875,310 @@
         ];
 
         function startCustomerOnboarding() {
-            onboardingData = {
-                step: 1,
-                timestamp: new Date().toISOString(),
-                onboardingId: 'ONB_' + Date.now()
-            };
+            showSailPointOnboardingModal();
+        }
+
+        function showSailPointOnboardingModal() {
+            const modal = document.createElement('div');
+            modal.id = 'sailpointOnboardingModal';
+            modal.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+                background: rgba(0,0,0,0.5); z-index: 1000; display: flex; 
+                align-items: center; justify-content: center; padding: 20px;
+            `;
             
-            currentOnboardingStep = 0;
-            document.getElementById('onboardingDisplay').style.display = 'block';
-            showOnboardingStep();
+            modal.innerHTML = `
+                <div style="background: white; border-radius: 15px; max-width: 800px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+                    <!-- Header -->
+                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; color: white; border-radius: 15px 15px 0 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <h2 style="margin: 0; font-size: 28px; font-weight: 600;">Enterprise Identity Security Onboarding</h2>
+                                <p style="margin: 5px 0 0 0; opacity: 0.9; font-size: 16px;">AI-Powered Identity Governance in 4 Phases</p>
+                            </div>
+                            <button onclick="closeSailPointModal()" style="background: rgba(255,255,255,0.2); border: none; color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 20px;">×</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Onboarding Phases -->
+                    <div style="padding: 30px;">
+                        <!-- Phase 1 -->
+                        <div style="margin-bottom: 30px; padding: 25px; border: 2px solid #e9ecef; border-radius: 12px; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#667eea'; this.style.boxShadow='0 5px 15px rgba(102, 126, 234, 0.1)'" onmouseout="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
+                            <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                                <div style="background: linear-gradient(135deg, #28a745, #20c997); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; margin-right: 20px;">1</div>
+                                <div>
+                                    <h3 style="margin: 0; color: #333; font-size: 20px;">Planning & Strategy</h3>
+                                    <p style="margin: 5px 0 0 0; color: #666; font-size: 14px;">Foundation & Assessment • 1-2 weeks</p>
+                                </div>
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; font-size: 14px;">
+                                <div>
+                                    <h4 style="margin: 0 0 10px 0; color: #495057; font-size: 16px;">Identity Security Charter</h4>
+                                    <ul style="margin: 0; padding-left: 20px; color: #666;">
+                                        <li>Objectives & scope definition</li>
+                                        <li>Success criteria alignment</li>
+                                        <li>Stakeholder responsibilities</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 style="margin: 0 0 10px 0; color: #495057; font-size: 16px;">Infrastructure Assessment</h4>
+                                    <ul style="margin: 0; padding-left: 20px; color: #666;">
+                                        <li>Current IAM system analysis</li>
+                                        <li>Risk & compliance evaluation</li>
+                                        <li>18-24 month roadmap</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Phase 2 -->
+                        <div style="margin-bottom: 30px; padding: 25px; border: 2px solid #e9ecef; border-radius: 12px; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#667eea'; this.style.boxShadow='0 5px 15px rgba(102, 126, 234, 0.1)'" onmouseout="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
+                            <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                                <div style="background: linear-gradient(135deg, #17a2b8, #138496); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; margin-right: 20px;">2</div>
+                                <div>
+                                    <h3 style="margin: 0; color: #333; font-size: 20px;">Foundation Setup</h3>
+                                    <p style="margin: 5px 0 0 0; color: #666; font-size: 14px;">Tenant & Core Integration • 2-3 weeks</p>
+                                </div>
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; font-size: 14px;">
+                                <div>
+                                    <h4 style="margin: 0 0 10px 0; color: #495057; font-size: 16px;">Secure Tenant Provisioning</h4>
+                                    <ul style="margin: 0; padding-left: 20px; color: #666;">
+                                        <li>Cloud tenant configuration</li>
+                                        <li>Security policy framework</li>
+                                        <li>Admin account setup</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 style="margin: 0 0 10px 0; color: #495057; font-size: 16px;">HR System Integration</h4>
+                                    <ul style="margin: 0; padding-left: 20px; color: #666;">
+                                        <li>Workday, ADP, SAP connectivity</li>
+                                        <li>Employee data synchronization</li>
+                                        <li>Identity repository establishment</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Phase 3 -->
+                        <div style="margin-bottom: 30px; padding: 25px; border: 2px solid #e9ecef; border-radius: 12px; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#667eea'; this.style.boxShadow='0 5px 15px rgba(102, 126, 234, 0.1)'" onmouseout="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
+                            <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                                <div style="background: linear-gradient(135deg, #ffc107, #e0a800); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; margin-right: 20px;">3</div>
+                                <div>
+                                    <h3 style="margin: 0; color: #333; font-size: 20px;">AI-Powered Application Discovery</h3>
+                                    <p style="margin: 5px 0 0 0; color: #666; font-size: 14px;">Smart Integration & Configuration • 3-6 weeks</p>
+                                </div>
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; font-size: 14px;">
+                                <div>
+                                    <h4 style="margin: 0 0 10px 0; color: #495057; font-size: 16px;">Automated Discovery</h4>
+                                    <ul style="margin: 0; padding-left: 20px; color: #666;">
+                                        <li>Enterprise application scanning</li>
+                                        <li>SSO system integration (Okta, Azure AD)</li>
+                                        <li>Ungoverned app identification</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 style="margin: 0 0 10px 0; color: #495057; font-size: 16px;">Smart Configuration</h4>
+                                    <ul style="margin: 0; padding-left: 20px; color: #666;">
+                                        <li>AI-driven policy recommendations</li>
+                                        <li>Account correlation mapping</li>
+                                        <li>Rapid connector deployment</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Phase 4 -->
+                        <div style="margin-bottom: 30px; padding: 25px; border: 2px solid #e9ecef; border-radius: 12px; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#667eea'; this.style.boxShadow='0 5px 15px rgba(102, 126, 234, 0.1)'" onmouseout="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
+                            <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                                <div style="background: linear-gradient(135deg, #6f42c1, #5a32a3); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; margin-right: 20px;">4</div>
+                                <div>
+                                    <h3 style="margin: 0; color: #333; font-size: 20px;">Lifecycle Management & Go-Live</h3>
+                                    <p style="margin: 5px 0 0 0; color: #666; font-size: 14px;">Production Deployment • 2-4 weeks</p>
+                                </div>
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; font-size: 14px;">
+                                <div>
+                                    <h4 style="margin: 0 0 10px 0; color: #495057; font-size: 16px;">Joiner-Mover-Leaver</h4>
+                                    <ul style="margin: 0; padding-left: 20px; color: #666;">
+                                        <li>Automated user provisioning</li>
+                                        <li>Role-based access workflows</li>
+                                        <li>Secure offboarding processes</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 style="margin: 0 0 10px 0; color: #495057; font-size: 16px;">Compliance & Support</h4>
+                                    <ul style="margin: 0; padding-left: 20px; color: #666;">
+                                        <li>Access certification campaigns</li>
+                                        <li>SOX, GDPR, HIPAA monitoring</li>
+                                        <li>24/7 enterprise support activation</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Success Metrics -->
+                        <div style="background: linear-gradient(135deg, #28a745, #20c997); padding: 25px; border-radius: 12px; color: white; text-align: center;">
+                            <h3 style="margin: 0 0 20px 0; font-size: 22px;">Expected Outcomes</h3>
+                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+                                <div>
+                                    <div style="font-size: 28px; font-weight: bold; margin-bottom: 5px;">12 weeks</div>
+                                    <div style="opacity: 0.9; font-size: 14px;">Average Implementation</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 28px; font-weight: bold; margin-bottom: 5px;">300%+</div>
+                                    <div style="opacity: 0.9; font-size: 14px;">ROI in Year 1</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 28px; font-weight: bold; margin-bottom: 5px;">95%</div>
+                                    <div style="opacity: 0.9; font-size: 14px;">Time Reduction</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px;">
+                            <button onclick="startEnterpriseAssessment()" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 18px; border: none; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 16px; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 25px rgba(102, 126, 234, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                                Start Enterprise Assessment
+                            </button>
+                            <button onclick="scheduleConsultation()" style="background: white; color: #667eea; padding: 18px; border: 2px solid #667eea; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 16px; transition: all 0.3s ease;" onmouseover="this.style.background='#667eea'; this.style.color='white'" onmouseout="this.style.background='white'; this.style.color='#667eea'">
+                                Schedule Consultation
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
             
-            // Store onboarding session
-            localStorage.setItem('idbq_onboarding', JSON.stringify(onboardingData));
+            document.body.appendChild(modal);
+        }
+
+        function closeSailPointModal() {
+            const modal = document.getElementById('sailpointOnboardingModal');
+            if (modal) modal.remove();
+        }
+
+        function startEnterpriseAssessment() {
+            closeSailPointModal();
+            showEnterpriseAssessmentForm();
+        }
+
+        function scheduleConsultation() {
+            closeSailPointModal();
+            alert('Schedule Enterprise Consultation\n\nOur identity security experts will contact you within 24 hours to:\n\n• Assess your current IAM infrastructure\n• Identify key security gaps and risks\n• Design a customized implementation roadmap\n• Discuss professional services options\n\nConsultation includes:\n✅ 60-minute strategy session\n✅ Written assessment report\n✅ ROI projection analysis\n✅ Implementation timeline\n\nThank you! A Senior Identity Consultant will reach out soon.');
+        }
+
+        function showEnterpriseAssessmentForm() {
+            const modal = document.createElement('div');
+            modal.id = 'assessmentModal';
+            modal.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+                background: rgba(0,0,0,0.5); z-index: 1000; display: flex; 
+                align-items: center; justify-content: center; padding: 20px;
+            `;
+            
+            modal.innerHTML = `
+                <div style="background: white; border-radius: 15px; max-width: 600px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+                    <div style="background: linear-gradient(135deg, #28a745, #20c997); padding: 25px; color: white; border-radius: 15px 15px 0 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h2 style="margin: 0; font-size: 24px;">Enterprise Identity Assessment</h2>
+                            <button onclick="closeAssessmentModal()" style="background: rgba(255,255,255,0.2); border: none; color: white; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; font-size: 18px;">×</button>
+                        </div>
+                        <p style="margin: 10px 0 0 0; opacity: 0.9;">Help us understand your identity security needs</p>
+                    </div>
+                    
+                    <form style="padding: 30px;" onsubmit="submitEnterpriseAssessment(event)">
+                        <!-- Company Information -->
+                        <div style="margin-bottom: 25px;">
+                            <h3 style="margin: 0 0 15px 0; color: #333; font-size: 18px;">Company Information</h3>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                                <input type="text" placeholder="Company Name" required style="padding: 12px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 16px;" onfocus="this.style.borderColor='#667eea'" onblur="this.style.borderColor='#e9ecef'">
+                                <select required style="padding: 12px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 16px;" onfocus="this.style.borderColor='#667eea'" onblur="this.style.borderColor='#e9ecef'">
+                                    <option value="">Employee Count</option>
+                                    <option value="100-500">100-500</option>
+                                    <option value="500-1000">500-1,000</option>
+                                    <option value="1000-5000">1,000-5,000</option>
+                                    <option value="5000+">5,000+</option>
+                                </select>
+                            </div>
+                            <input type="email" placeholder="Business Email" required style="width: 100%; padding: 12px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 16px; box-sizing: border-box;" onfocus="this.style.borderColor='#667eea'" onblur="this.style.borderColor='#e9ecef'">
+                        </div>
+
+                        <!-- Current IAM Environment -->
+                        <div style="margin-bottom: 25px;">
+                            <h3 style="margin: 0 0 15px 0; color: #333; font-size: 18px;">Current IAM Environment</h3>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                <select required style="padding: 12px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 16px;" onfocus="this.style.borderColor='#667eea'" onblur="this.style.borderColor='#e9ecef'">
+                                    <option value="">Primary Directory</option>
+                                    <option value="azure-ad">Microsoft Azure AD</option>
+                                    <option value="active-directory">Active Directory</option>
+                                    <option value="okta">Okta</option>
+                                    <option value="other">Other/Multiple</option>
+                                </select>
+                                <select required style="padding: 12px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 16px;" onfocus="this.style.borderColor='#667eea'" onblur="this.style.borderColor='#e9ecef'">
+                                    <option value="">Applications Count</option>
+                                    <option value="10-50">10-50 applications</option>
+                                    <option value="50-100">50-100 applications</option>
+                                    <option value="100-500">100-500 applications</option>
+                                    <option value="500+">500+ applications</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Key Priorities -->
+                        <div style="margin-bottom: 25px;">
+                            <h3 style="margin: 0 0 15px 0; color: #333; font-size: 18px;">Key Priorities (Select all that apply)</h3>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                                <label style="display: flex; align-items: center; cursor: pointer; padding: 8px;">
+                                    <input type="checkbox" style="margin-right: 10px; transform: scale(1.2);"> Zero Trust Implementation
+                                </label>
+                                <label style="display: flex; align-items: center; cursor: pointer; padding: 8px;">
+                                    <input type="checkbox" style="margin-right: 10px; transform: scale(1.2);"> Compliance (SOX, GDPR)
+                                </label>
+                                <label style="display: flex; align-items: center; cursor: pointer; padding: 8px;">
+                                    <input type="checkbox" style="margin-right: 10px; transform: scale(1.2);"> Privileged Access Management
+                                </label>
+                                <label style="display: flex; align-items: center; cursor: pointer; padding: 8px;">
+                                    <input type="checkbox" style="margin-right: 10px; transform: scale(1.2);"> Identity Governance
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Implementation Timeline -->
+                        <div style="margin-bottom: 30px;">
+                            <h3 style="margin: 0 0 15px 0; color: #333; font-size: 18px;">Preferred Implementation Timeline</h3>
+                            <select required style="width: 100%; padding: 12px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 16px; box-sizing: border-box;" onfocus="this.style.borderColor='#667eea'" onblur="this.style.borderColor='#e9ecef'">
+                                <option value="">Select Timeline</option>
+                                <option value="immediate">Immediate (1-3 months)</option>
+                                <option value="near-term">Near-term (3-6 months)</option>
+                                <option value="planned">Planned (6-12 months)</option>
+                                <option value="future">Future consideration (12+ months)</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" style="width: 100%; background: linear-gradient(135deg, #28a745, #20c997); color: white; padding: 18px; border: none; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 18px; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 25px rgba(40, 167, 69, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                            Begin Enterprise Assessment
+                        </button>
+                    </form>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+
+        function closeAssessmentModal() {
+            const modal = document.getElementById('assessmentModal');
+            if (modal) modal.remove();
+        }
+
+        function submitEnterpriseAssessment(event) {
+            event.preventDefault();
+            closeAssessmentModal();
+            
+            // Generate unique assessment ID
+            const assessmentId = 'ASS_' + Date.now();
+            
+            alert(`Enterprise Assessment Submitted Successfully!\n\nAssessment ID: ${assessmentId}\n\nNext Steps:\n\n1. Technical Discovery Call (Within 48 hours)\n   • Deep-dive into your current IAM architecture\n   • Security gap analysis and risk assessment\n\n2. Custom Implementation Plan (Week 1)\n   • Tailored 4-phase deployment roadmap\n   • Resource allocation and timeline planning\n\n3. Professional Services Proposal (Week 2)\n   • Detailed service engagement options\n   • Investment and ROI projections\n\nOur Enterprise Solutions team will contact you within 24 hours to schedule your discovery call.\n\nThank you for choosing IDBrainQ Enterprise!`);
         }
 
         function showOnboardingStep() {
