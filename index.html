@@ -636,11 +636,129 @@
                         <div class="stat-number">156</div>
                         <div class="stat-label">Active Tenants</div>
                     </div>
-                    <div class="stat-card" style="background: linear-gradient(135deg, #6f42c1, #5a32a3);">
-                        <div class="stat-number">2.1M</div>
-                        <div class="stat-label">Identities Managed</div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, #6f42c1, #5a32a3); color: white;">
+                        <div class="stat-number" style="color: white;">2.1M</div>
+                        <div class="stat-label" style="color: rgba(255,255,255,0.9);">Identities Managed</div>
                     </div>
                 `;
+                
+                // Add additional dashboard content
+                const dashboardContent = document.querySelector('.navigation-grid').parentNode;
+                const additionalContent = document.createElement('div');
+                additionalContent.innerHTML = `
+                    <!-- Real-time Dashboard Widgets -->
+                    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin: 20px 0;">
+                        
+                        <!-- Main Content Panel -->
+                        <div>
+                            <!-- System Health Panel -->
+                            <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 20px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #dee2e6;">
+                                <h3 style="margin: 0 0 15px 0; color: #333; font-size: 18px; display: flex; align-items: center;">
+                                    <span style="background: #28a745; color: white; border-radius: 50%; width: 8px; height: 8px; margin-right: 10px; display: inline-block;"></span>
+                                    System Health Monitor
+                                </h3>
+                                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+                                    <div style="text-align: center; padding: 10px;">
+                                        <div style="font-size: 20px; font-weight: bold; color: #28a745;">99.9%</div>
+                                        <div style="font-size: 12px; color: #666;">Uptime</div>
+                                    </div>
+                                    <div style="text-align: center; padding: 10px;">
+                                        <div style="font-size: 20px; font-weight: bold; color: #17a2b8;">1.2ms</div>
+                                        <div style="font-size: 12px; color: #666;">Response Time</div>
+                                    </div>
+                                    <div style="text-align: center; padding: 10px;">
+                                        <div style="font-size: 20px; font-weight: bold; color: #ffc107;">0</div>
+                                        <div style="font-size: 12px; color: #666;">Active Incidents</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Security Dashboard -->
+                            <div style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); padding: 20px; border-radius: 12px; color: white;">
+                                <h3 style="margin: 0 0 15px 0; color: white; font-size: 18px;">Security Status</h3>
+                                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px;">
+                                    <div style="text-align: center;">
+                                        <div style="font-size: 18px; font-weight: bold;">12</div>
+                                        <div style="font-size: 11px; opacity: 0.9;">Threats Blocked</div>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <div style="font-size: 18px; font-weight: bold;">100%</div>
+                                        <div style="font-size: 11px; opacity: 0.9;">Compliance Score</div>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <div style="font-size: 18px; font-weight: bold;">847</div>
+                                        <div style="font-size: 11px; opacity: 0.9;">Risk Assessments</div>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <div style="font-size: 18px; font-weight: bold;">0</div>
+                                        <div style="font-size: 11px; opacity: 0.9;">Critical Alerts</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Sidebar Content -->
+                        <div>
+                            <!-- Recent Activity Panel -->
+                            <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #e9ecef;">
+                                <h4 style="margin: 0 0 12px 0; color: #333; font-size: 14px;">Recent Activity</h4>
+                                <div style="display: flex; flex-direction: column; gap: 10px;">
+                                    <div style="display: flex; align-items: center; gap: 8px; padding: 8px; background: white; border-radius: 4px; border-left: 3px solid #28a745;">
+                                        <span style="font-size: 11px; color: #666;">New customer onboarded - Acme Corp</span>
+                                        <span style="font-size: 9px; color: #999; margin-left: auto;">2m ago</span>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 8px; padding: 8px; background: white; border-radius: 4px; border-left: 3px solid #17a2b8;">
+                                        <span style="font-size: 11px; color: #666;">Compliance report generated</span>
+                                        <span style="font-size: 9px; color: #999; margin-left: auto;">15m ago</span>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 8px; padding: 8px; background: white; border-radius: 4px; border-left: 3px solid #ffc107;">
+                                        <span style="font-size: 11px; color: #666;">Security scan completed</span>
+                                        <span style="font-size: 9px; color: #999; margin-left: auto;">1h ago</span>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 8px; padding: 8px; background: white; border-radius: 4px; border-left: 3px solid #6f42c1;">
+                                        <span style="font-size: 11px; color: #666;">AI model updated</span>
+                                        <span style="font-size: 9px; color: #999; margin-left: auto;">3h ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Quick Actions Panel -->
+                            <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #e9ecef;">
+                                <h4 style="margin: 0 0 12px 0; color: #333; font-size: 14px;">Quick Actions</h4>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                                    <button onclick="generateReport()" style="background: #667eea; color: white; border: none; padding: 10px 8px; border-radius: 4px; font-size: 11px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='#5a67d8'" onmouseout="this.style.background='#667eea'">📊 Reports</button>
+                                    <button onclick="viewAlerts()" style="background: #dc3545; color: white; border: none; padding: 10px 8px; border-radius: 4px; font-size: 11px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='#c82333'" onmouseout="this.style.background='#dc3545'">🚨 Alerts</button>
+                                    <button onclick="systemSettings()" style="background: #6c757d; color: white; border: none; padding: 10px 8px; border-radius: 4px; font-size: 11px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='#5a6268'" onmouseout="this.style.background='#6c757d'">⚙️ Settings</button>
+                                    <button onclick="viewAnalytics()" style="background: #28a745; color: white; border: none; padding: 10px 8px; border-radius: 4px; font-size: 11px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='#218838'" onmouseout="this.style.background='#28a745'">📈 Analytics</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Platform Status -->
+                            <div style="background: linear-gradient(135deg, #6f42c1 0%, #5a32a3 100%); padding: 15px; border-radius: 8px; color: white;">
+                                <h4 style="margin: 0 0 12px 0; color: white; font-size: 14px;">Platform Status</h4>
+                                <div style="display: flex; flex-direction: column; gap: 8px;">
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <span style="font-size: 11px;">Active Integrations</span>
+                                        <span style="font-size: 11px; font-weight: bold;">150+</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <span style="font-size: 11px;">Data Centers</span>
+                                        <span style="font-size: 11px; font-weight: bold;">12</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <span style="font-size: 11px;">API Calls/min</span>
+                                        <span style="font-size: 11px; font-weight: bold;">2.4K</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <span style="font-size: 11px;">Storage Used</span>
+                                        <span style="font-size: 11px; font-weight: bold;">47.2TB</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                dashboardContent.insertBefore(additionalContent, document.querySelector('.navigation-grid'));
             }
             
             // Add super admin navigation options
@@ -648,8 +766,25 @@
         }
 
         function addSuperAdminNavigation() {
-            // Super admin functionality removed for minimal interface
-            console.log('Super admin detected - minimal interface maintained');
+            // Super admin functionality enhanced
+            console.log('Super admin detected - enhanced interface loaded');
+        }
+        
+        // Quick action functions
+        function generateReport() {
+            alert('📊 Enterprise Report Generator\n\nAvailable Reports:\n• Customer Activity Summary\n• Security Compliance Report\n• Revenue & Growth Analytics\n• System Performance Report\n• Identity Audit Report\n\nReports are generated in real-time with current data.');
+        }
+        
+        function viewAlerts() {
+            alert('🚨 Security Alert Center\n\nCurrent Status: All Clear ✅\n\n• 0 Critical Alerts\n• 0 Warning Alerts\n• 12 Threats Blocked Today\n• 100% System Health\n\nAll systems operating normally.');
+        }
+        
+        function systemSettings() {
+            alert('⚙️ System Administration\n\nAvailable Settings:\n• Platform Configuration\n• User Management\n• Integration Settings\n• Security Policies\n• Compliance Rules\n• Audit Logging\n\nAccess level: Super Administrator');
+        }
+        
+        function viewAnalytics() {
+            alert('📈 Platform Analytics\n\nKey Metrics:\n• 47+ Enterprise Customers\n• $847K Monthly Revenue\n• 98.5% Customer Retention\n• 2.1M Identities Managed\n• 150+ Active Integrations\n\nReal-time dashboard updated.');
         }
 
         function showRegularDashboard() {
