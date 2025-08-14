@@ -553,12 +553,56 @@
                 </div>
                 <div style="text-align: left;">
                     <p><strong>Please provide your company details for customized setup:</strong></p>
-                    <ul style="margin: 15px 0;">
-                        <li>Company Name & Industry</li>
-                        <li>Employee Count (100-500, 500-1000, 1000-5000, 5000+)</li>
-                        <li>Current IAM Solution (Active Directory, Okta, Azure AD, Custom)</li>
-                        <li>Geographic Locations</li>
-                    </ul>
+                    
+                    <div style="margin: 20px 0;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: bold;">Company Name:</label>
+                        <input type="text" id="companyName" placeholder="Enter your company name" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 15px;">
+                        
+                        <label style="display: block; margin-bottom: 5px; font-weight: bold;">Industry:</label>
+                        <select id="industry" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 15px;">
+                            <option value="">Select Industry</option>
+                            <option value="financial">Financial Services</option>
+                            <option value="healthcare">Healthcare</option>
+                            <option value="technology">Technology</option>
+                            <option value="government">Government</option>
+                            <option value="education">Education</option>
+                            <option value="retail">Retail</option>
+                            <option value="manufacturing">Manufacturing</option>
+                            <option value="other">Other</option>
+                        </select>
+                        
+                        <label style="display: block; margin-bottom: 5px; font-weight: bold;">Employee Count:</label>
+                        <select id="employeeCount" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 15px;">
+                            <option value="">Select Employee Count</option>
+                            <option value="100-500">100-500 employees</option>
+                            <option value="500-1000">500-1,000 employees</option>
+                            <option value="1000-5000">1,000-5,000 employees</option>
+                            <option value="5000+">5,000+ employees</option>
+                        </select>
+                        
+                        <label style="display: block; margin-bottom: 5px; font-weight: bold;">Current IAM Solution:</label>
+                        <select id="currentIAM" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 15px;">
+                            <option value="">Select Current Solution</option>
+                            <option value="active-directory">Active Directory</option>
+                            <option value="okta">Okta</option>
+                            <option value="azure-ad">Azure AD</option>
+                            <option value="aws-iam">AWS IAM</option>
+                            <option value="google-workspace">Google Workspace</option>
+                            <option value="custom">Custom Solution</option>
+                            <option value="none">No Current Solution</option>
+                        </select>
+                        
+                        <label style="display: block; margin-bottom: 5px; font-weight: bold;">Primary Geographic Location:</label>
+                        <select id="geography" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                            <option value="">Select Location</option>
+                            <option value="north-america">North America</option>
+                            <option value="europe">Europe</option>
+                            <option value="asia-pacific">Asia Pacific</option>
+                            <option value="latin-america">Latin America</option>
+                            <option value="middle-east-africa">Middle East & Africa</option>
+                            <option value="global">Global (Multiple Regions)</option>
+                        </select>
+                    </div>
                 </div>`
             },
             {
@@ -721,6 +765,32 @@
         }
 
         function nextOnboardingStep() {
+            // Collect form data from Step 1
+            if (currentOnboardingStep === 0) {
+                const companyName = document.getElementById('companyName')?.value;
+                const industry = document.getElementById('industry')?.value;
+                const employeeCount = document.getElementById('employeeCount')?.value;
+                const currentIAM = document.getElementById('currentIAM')?.value;
+                const geography = document.getElementById('geography')?.value;
+                
+                // Validate required fields
+                if (!companyName || !industry || !employeeCount) {
+                    alert('Please fill in all required fields (Company Name, Industry, and Employee Count) before continuing.');
+                    return;
+                }
+                
+                // Store customer data
+                onboardingData.customerInfo = {
+                    companyName,
+                    industry,
+                    employeeCount,
+                    currentIAM,
+                    geography
+                };
+                
+                console.log('Customer data collected:', onboardingData.customerInfo);
+            }
+            
             if (currentOnboardingStep < onboardingSteps.length - 1) {
                 currentOnboardingStep++;
                 showOnboardingStep();
@@ -729,8 +799,18 @@
 
         function completeOnboarding() {
             console.log('✅ Customer onboarding completed:', onboardingData.onboardingId);
+            console.log('Complete customer data:', onboardingData);
+            
+            // Generate personalized completion message
+            const customerName = onboardingData.customerInfo?.companyName || 'Enterprise Customer';
+            const industry = onboardingData.customerInfo?.industry || 'your industry';
+            
             document.getElementById('onboardingDisplay').style.display = 'none';
-            alert('🎉 Onboarding Complete!\n\nThank you for choosing IDBrainQ Enterprise Identity Platform.\n\nYour onboarding ID: ' + onboardingData.onboardingId + '\n\nOur team will contact you within 24 hours to begin implementation.');
+            
+            alert(`🎉 Welcome ${customerName}!\n\nOnboarding Complete for ${industry} industry.\n\nOnboarding ID: ${onboardingData.onboardingId}\n\nYour IDBrainQ Enterprise setup is ready. Our specialized ${industry} team will contact you within 24 hours to begin implementation.\n\nNext Steps:\n✓ Technical assessment scheduled\n✓ Custom integration planning\n✓ Dedicated customer success manager assigned\n\nContact: enterprise@idbrainq.com`);
+            
+            // Store complete onboarding data
+            localStorage.setItem('idbq_completed_onboarding', JSON.stringify(onboardingData));
         }
 
         function closeOnboarding() {
