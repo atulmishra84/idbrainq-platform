@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IDBrainQ - Enhanced Enterprise Platform v2.1</title>
+    <title>IDBrainQ - Enhanced Enterprise Platform v2.2 - Customer Management</title>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
@@ -1501,53 +1501,272 @@
             document.getElementById('onboardingDisplay').style.display = 'none';
         }
         
+        // Customer data storage
+        let customers = JSON.parse(localStorage.getItem('idbq_customers')) || [
+            {
+                id: 'cust_001',
+                companyName: 'ACME Financial Services',
+                email: 'admin@acmefinancial.com',
+                industry: 'Financial Services',
+                employeeCount: '1000-5000',
+                registrationDate: '2024-12-15',
+                status: 'Active',
+                revenue: 89000,
+                planType: 'Enterprise Plus',
+                contactPerson: 'Sarah Johnson',
+                phone: '+1-555-0123',
+                identitiesManaged: 2847,
+                complianceFrameworks: ['SOX', 'PCI DSS'],
+                healthScore: 98
+            },
+            {
+                id: 'cust_002',
+                companyName: 'Healthcare Systems Group',
+                email: 'it@healthsystems.com',
+                industry: 'Healthcare',
+                employeeCount: '500-1000',
+                registrationDate: '2024-12-20',
+                status: 'Active',
+                revenue: 67000,
+                planType: 'Enterprise',
+                contactPerson: 'Dr. Michael Chen',
+                phone: '+1-555-0234',
+                identitiesManaged: 5421,
+                complianceFrameworks: ['HIPAA', 'SOX'],
+                healthScore: 92
+            },
+            {
+                id: 'cust_003',
+                companyName: 'TechCorp Industries',
+                email: 'security@techcorp.io',
+                industry: 'Technology',
+                employeeCount: '1000-5000',
+                registrationDate: '2025-01-08',
+                status: 'Active',
+                revenue: 45000,
+                planType: 'Enterprise',
+                contactPerson: 'Alex Rodriguez',
+                phone: '+1-555-0345',
+                identitiesManaged: 1203,
+                complianceFrameworks: ['GDPR', 'ISO 27001'],
+                healthScore: 95
+            },
+            {
+                id: 'cust_004',
+                companyName: 'Global Manufacturing Inc',
+                email: 'iam@globalmanuf.com',
+                industry: 'Manufacturing',
+                employeeCount: '5000+',
+                registrationDate: '2025-01-15',
+                status: 'Active',
+                revenue: 38000,
+                planType: 'Enterprise Plus',
+                contactPerson: 'Jennifer Smith',
+                phone: '+1-555-0456',
+                identitiesManaged: 3892,
+                complianceFrameworks: ['ISO 27001', 'NIST'],
+                healthScore: 94
+            },
+            {
+                id: 'cust_005',
+                companyName: 'SecureBank Solutions',
+                email: 'ops@securebank.net',
+                industry: 'Financial Services',
+                employeeCount: '500-1000',
+                registrationDate: '2025-02-01',
+                status: 'Active',
+                revenue: 32000,
+                planType: 'Enterprise',
+                contactPerson: 'Robert Wilson',
+                phone: '+1-555-0567',
+                identitiesManaged: 1876,
+                complianceFrameworks: ['PCI DSS', 'SOX'],
+                healthScore: 96
+            }
+        ];
+
         function viewCustomerPortal() {
-            const customerManagement = `🏢 IDBrainQ Customer Management Portal
+            // Create modal for customer management
+            const modal = document.createElement('div');
+            modal.id = 'customerModal';
+            modal.innerHTML = `
+                <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 10000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px);">
+                    <div style="background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%); padding: 30px; border-radius: 20px; width: 95%; max-width: 1400px; max-height: 90%; overflow-y: auto; border: 2px solid rgba(0, 212, 255, 0.3); box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                            <h2 style="color: #e2e8f0; font-size: 28px; margin: 0; background: linear-gradient(135deg, #00d4ff 0%, #5b73ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700;">Customer Management Portal</h2>
+                            <button onclick="closeCustomerModal()" style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%); color: white; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600; transition: all 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">✕ Close</button>
+                        </div>
+                        
+                        <!-- Customer Stats Overview -->
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px;">
+                            <div style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); padding: 25px; border-radius: 15px; text-align: center; color: white; border: 1px solid rgba(255, 255, 255, 0.1);">
+                                <div style="font-size: 32px; font-weight: bold; margin-bottom: 5px;">${customers.length}</div>
+                                <div style="font-size: 14px; opacity: 0.9; font-weight: 500;">Total Customers</div>
+                            </div>
+                            <div style="background: linear-gradient(135deg, #17a2b8 0%, #138496 100%); padding: 25px; border-radius: 15px; text-align: center; color: white; border: 1px solid rgba(255, 255, 255, 0.1);">
+                                <div style="font-size: 32px; font-weight: bold; margin-bottom: 5px;">$${customers.reduce((sum, c) => sum + c.revenue, 0).toLocaleString()}</div>
+                                <div style="font-size: 14px; opacity: 0.9; font-weight: 500;">Monthly Revenue</div>
+                            </div>
+                            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 25px; border-radius: 15px; text-align: center; color: white; border: 1px solid rgba(255, 255, 255, 0.1);">
+                                <div style="font-size: 32px; font-weight: bold; margin-bottom: 5px;">98.5%</div>
+                                <div style="font-size: 14px; opacity: 0.9; font-weight: 500;">Retention Rate</div>
+                            </div>
+                            <div style="background: linear-gradient(135deg, #fd7e14 0%, #e8590c 100%); padding: 25px; border-radius: 15px; text-align: center; color: white; border: 1px solid rgba(255, 255, 255, 0.1);">
+                                <div style="font-size: 32px; font-weight: bold; margin-bottom: 5px;">${customers.reduce((sum, c) => sum + c.identitiesManaged, 0).toLocaleString()}</div>
+                                <div style="font-size: 14px; opacity: 0.9; font-weight: 500;">Identities Managed</div>
+                            </div>
+                        </div>
 
-CURRENT CUSTOMERS (Demo Environment):
+                        <!-- Customer Table -->
+                        <div style="background: rgba(45, 55, 72, 0.5); border-radius: 15px; padding: 25px; border: 1px solid rgba(0, 212, 255, 0.2);">
+                            <h3 style="color: #e2e8f0; margin: 0 0 20px 0; font-size: 20px; font-weight: 600;">Recently Registered Customers</h3>
+                            <div style="overflow-x: auto;">
+                                <table style="width: 100%; border-collapse: collapse;">
+                                    <thead>
+                                        <tr style="background: rgba(0, 212, 255, 0.1); border-bottom: 2px solid rgba(0, 212, 255, 0.3);">
+                                            <th style="padding: 15px 12px; text-align: left; color: #00d4ff; font-weight: 600; font-size: 14px;">Company</th>
+                                            <th style="padding: 15px 12px; text-align: left; color: #00d4ff; font-weight: 600; font-size: 14px;">Contact</th>
+                                            <th style="padding: 15px 12px; text-align: left; color: #00d4ff; font-weight: 600; font-size: 14px;">Industry</th>
+                                            <th style="padding: 15px 12px; text-align: left; color: #00d4ff; font-weight: 600; font-size: 14px;">Registration</th>
+                                            <th style="padding: 15px 12px; text-align: left; color: #00d4ff; font-weight: 600; font-size: 14px;">Revenue</th>
+                                            <th style="padding: 15px 12px; text-align: left; color: #00d4ff; font-weight: 600; font-size: 14px;">Health</th>
+                                            <th style="padding: 15px 12px; text-align: left; color: #00d4ff; font-weight: 600; font-size: 14px;">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${customers.sort((a, b) => new Date(b.registrationDate) - new Date(a.registrationDate)).map(customer => `
+                                            <tr style="border-bottom: 1px solid rgba(0, 212, 255, 0.1); transition: all 0.2s;" onmouseover="this.style.background='rgba(0, 212, 255, 0.05)'" onmouseout="this.style.background='transparent'">
+                                                <td style="padding: 15px 12px;">
+                                                    <div style="color: #e2e8f0; font-weight: 600; font-size: 14px; margin-bottom: 2px;">${customer.companyName}</div>
+                                                    <div style="color: #a0aec0; font-size: 12px;">${customer.planType} • ${customer.employeeCount}</div>
+                                                </td>
+                                                <td style="padding: 15px 12px;">
+                                                    <div style="color: #e2e8f0; font-size: 13px; margin-bottom: 2px;">${customer.contactPerson}</div>
+                                                    <div style="color: #a0aec0; font-size: 12px;">${customer.email}</div>
+                                                </td>
+                                                <td style="padding: 15px 12px; color: #a0aec0; font-size: 13px;">${customer.industry}</td>
+                                                <td style="padding: 15px 12px; color: #a0aec0; font-size: 13px;">${new Date(customer.registrationDate).toLocaleDateString()}</td>
+                                                <td style="padding: 15px 12px; color: #28a745; font-weight: 600; font-size: 13px;">$${customer.revenue.toLocaleString()}/mo</td>
+                                                <td style="padding: 15px 12px;">
+                                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                                        <div style="width: 40px; height: 6px; background: #2d3748; border-radius: 3px; overflow: hidden;">
+                                                            <div style="width: ${customer.healthScore}%; height: 100%; background: ${customer.healthScore >= 95 ? '#28a745' : customer.healthScore >= 90 ? '#ffc107' : '#dc3545'}; border-radius: 3px;"></div>
+                                                        </div>
+                                                        <span style="color: #a0aec0; font-size: 12px;">${customer.healthScore}%</span>
+                                                    </div>
+                                                </td>
+                                                <td style="padding: 15px 12px;">
+                                                    <button onclick="viewCustomerDetails('${customer.id}')" style="background: linear-gradient(135deg, #00d4ff 0%, #5b73ff 100%); color: white; border: none; padding: 6px 12px; border-radius: 6px; font-size: 11px; cursor: pointer; margin-right: 5px; font-weight: 500;">View</button>
+                                                    <button onclick="editCustomer('${customer.id}')" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 6px 12px; border-radius: 6px; font-size: 11px; cursor: pointer; font-weight: 500;">Edit</button>
+                                                </td>
+                                            </tr>
+                                        `).join('')}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
 
-1. ACME Financial Services
-   - Status: Active Production
-   - Users: 2,847 identities managed
-   - Compliance: SOX, PCI DSS compliant
-   - Contract: Enterprise license (2-year)
-   - Support: Premium 24/7 support
-   - Health Score: 98% (Excellent)
+                        <div style="margin-top: 25px; text-align: center; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                            <button onclick="addNewCustomer()" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 14px; cursor: pointer; font-weight: 600; transition: all 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">+ Add New Customer</button>
+                            <button onclick="exportCustomerData()" style="background: linear-gradient(135deg, #17a2b8 0%, #138496 100%); color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 14px; cursor: pointer; font-weight: 600; transition: all 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">📊 Export Data</button>
+                            <button onclick="generateCustomerReport()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 14px; cursor: pointer; font-weight: 600; transition: all 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">📈 Generate Report</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
 
-2. TechCorp Industries  
-   - Status: Active Production
-   - Users: 1,203 identities managed
-   - Compliance: GDPR, ISO 27001 compliant
-   - Contract: Per-user licensing (Annual)
-   - Support: Standard support
-   - Health Score: 95% (Very Good)
+        function closeCustomerModal() {
+            const modal = document.getElementById('customerModal');
+            if (modal) modal.remove();
+        }
 
-3. Healthcare Systems Group
-   - Status: Implementation Phase
-   - Users: 5,421 identities (migration in progress)
-   - Compliance: HIPAA, SOX compliant
-   - Contract: Enterprise unlimited (3-year)
-   - Support: Premium implementation support
-   - Health Score: 92% (Good - Implementation)
+        function viewCustomerDetails(customerId) {
+            const customer = customers.find(c => c.id === customerId);
+            if (!customer) return;
 
-CUSTOMER SUCCESS METRICS:
-- Total Enterprise Customers: 47 active
-- Average Implementation Time: 28 days
-- Customer Satisfaction Score: 4.8/5.0
-- Identity Risk Reduction: 73% average
-- Compliance Audit Success: 99.2%
+            const detailsModal = document.createElement('div');
+            detailsModal.innerHTML = `
+                <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); z-index: 10001; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(6px);">
+                    <div style="background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%); padding: 40px; border-radius: 20px; width: 90%; max-width: 600px; border: 2px solid rgba(0, 212, 255, 0.3);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                            <h3 style="color: #e2e8f0; font-size: 22px; margin: 0; background: linear-gradient(135deg, #00d4ff 0%, #5b73ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Customer Details</h3>
+                            <button onclick="this.parentElement.parentElement.parentElement.remove()" style="background: #ff6b6b; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer;">✕</button>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; color: #e2e8f0;">
+                            <div>
+                                <strong style="color: #00d4ff;">Company:</strong><br>${customer.companyName}
+                            </div>
+                            <div>
+                                <strong style="color: #00d4ff;">Contact:</strong><br>${customer.contactPerson}
+                            </div>
+                            <div>
+                                <strong style="color: #00d4ff;">Email:</strong><br>${customer.email}
+                            </div>
+                            <div>
+                                <strong style="color: #00d4ff;">Phone:</strong><br>${customer.phone}
+                            </div>
+                            <div>
+                                <strong style="color: #00d4ff;">Industry:</strong><br>${customer.industry}
+                            </div>
+                            <div>
+                                <strong style="color: #00d4ff;">Employees:</strong><br>${customer.employeeCount}
+                            </div>
+                            <div>
+                                <strong style="color: #00d4ff;">Registration:</strong><br>${new Date(customer.registrationDate).toLocaleDateString()}
+                            </div>
+                            <div>
+                                <strong style="color: #00d4ff;">Plan:</strong><br>${customer.planType}
+                            </div>
+                            <div>
+                                <strong style="color: #00d4ff;">Monthly Revenue:</strong><br><span style="color: #28a745; font-weight: 600;">$${customer.revenue.toLocaleString()}</span>
+                            </div>
+                            <div>
+                                <strong style="color: #00d4ff;">Health Score:</strong><br><span style="color: ${customer.healthScore >= 95 ? '#28a745' : customer.healthScore >= 90 ? '#ffc107' : '#dc3545'}; font-weight: 600;">${customer.healthScore}%</span>
+                            </div>
+                            <div>
+                                <strong style="color: #00d4ff;">Identities:</strong><br>${customer.identitiesManaged.toLocaleString()} managed
+                            </div>
+                            <div>
+                                <strong style="color: #00d4ff;">Compliance:</strong><br>${customer.complianceFrameworks.join(', ')}
+                            </div>
+                        </div>
+                        <div style="margin-top: 25px; padding: 20px; background: rgba(0, 212, 255, 0.1); border-radius: 10px; border: 1px solid rgba(0, 212, 255, 0.2);">
+                            <strong style="color: #00d4ff;">Status:</strong> <span style="color: #28a745; font-weight: 600;">${customer.status}</span><br>
+                            <small style="color: #a0aec0;">Customer is in good standing with all services active and compliant.</small>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(detailsModal);
+        }
 
-REVENUE METRICS:
-- Monthly Recurring Revenue: $847,000
-- Annual Contract Value Growth: +156%
-- Customer Retention Rate: 98.5%
-- Average Deal Size: $125,000/year
+        function editCustomer(customerId) {
+            alert(`Edit Customer: ${customerId}\n\nAdvanced customer management features:\n• Update company information\n• Modify subscription plans\n• Change billing settings\n• Manage feature access\n• Update compliance requirements\n• Configure support level\n\nFull editing interface available in production environment.`);
+        }
 
-✅ Ready to onboard your next enterprise customer
-Contact our sales team for enterprise demonstrations.`;
+        function addNewCustomer() {
+            alert(`Add New Enterprise Customer\n\nCustomer onboarding process includes:\n• Company profile and verification\n• Technical requirements assessment\n• Plan selection and pricing\n• Integration configuration\n• Compliance setup\n• Training and support assignment\n\nThis opens the complete enterprise onboarding wizard.`);
+        }
 
-            alert(customerManagement);
-            console.log('Customer management portal accessed');
+        function exportCustomerData() {
+            const totalCustomers = customers.length;
+            const totalRevenue = customers.reduce((sum, c) => sum + c.revenue, 0);
+            const avgHealthScore = Math.round(customers.reduce((sum, c) => sum + c.healthScore, 0) / customers.length);
+            
+            alert(`Customer Data Export\n\nExport Summary:\n• ${totalCustomers} total customers\n• $${totalRevenue.toLocaleString()} monthly revenue\n• ${avgHealthScore}% average health score\n• Latest registration: ${customers.sort((a, b) => new Date(b.registrationDate) - new Date(a.registrationDate))[0].companyName}\n\nExport includes:\n• Customer profiles and contacts\n• Revenue and billing data\n• Health scores and metrics\n• Compliance frameworks\n• Registration timeline\n\nCSV file would be generated with complete dataset.`);
+        }
+
+        function generateCustomerReport() {
+            const industryBreakdown = customers.reduce((acc, customer) => {
+                acc[customer.industry] = (acc[customer.industry] || 0) + 1;
+                return acc;
+            }, {});
+            
+            const topIndustry = Object.entries(industryBreakdown).sort((a, b) => b[1] - a[1])[0];
+            
+            alert(`Customer Analytics Report\n\nIndustry Breakdown:\n${Object.entries(industryBreakdown).map(([industry, count]) => `• ${industry}: ${count} customers`).join('\n')}\n\nTop Industry: ${topIndustry[0]} (${topIndustry[1]} customers)\n\nGrowth Metrics:\n• New customers this month: 2\n• Revenue growth: +23.5%\n• Health score trend: +2.1%\n• Retention rate: 98.5%\n\nComprehensive analytics dashboard available in full implementation.`);
         }
 
         // Super Admin Functions
@@ -1753,8 +1972,8 @@ All monitoring systems active and reporting.`;
         window.addEventListener('load', optimizeForScreen);
         window.addEventListener('resize', optimizeForScreen);
         
-        console.log('IDBrainQ Enhanced Enterprise Platform v2.1 Ready - Auto Resolution Detection Active');
-        console.log('Enhanced Dashboard Version 2.1 - Build:', new Date().toISOString());
+        console.log('IDBrainQ Enhanced Enterprise Platform v2.2 Ready - Customer Management System Active');
+        console.log('Enhanced Dashboard Version 2.2 - Build:', new Date().toISOString());
         
         // Force page refresh on first load to ensure latest version
         if (!localStorage.getItem('enhanced_dashboard_loaded')) {
