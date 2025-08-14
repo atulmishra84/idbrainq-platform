@@ -538,43 +538,114 @@
                 onboardingId: 'ONB_' + Date.now()
             };
             
-            const onboardingSteps = `🎯 IDBrainQ Enterprise Customer Onboarding
+            // Step 1: Welcome and Company Info
+            const welcomeMessage = `🎯 Welcome to IDBrainQ Enterprise Onboarding!
 
-STEP 1: Company Information Collection
-- Company Name: [Customer Input Required]
-- Industry: Financial Services, Healthcare, Technology, Government
-- Employee Count: 100-500, 500-1000, 1000-5000, 5000+
-- Current IAM Solution: Active Directory, Okta, Azure AD, Custom
+Onboarding ID: ${customerData.onboardingId}
+Started: ${new Date().toLocaleString()}
 
-STEP 2: Technical Assessment
-- Infrastructure: On-premise, Cloud (AWS/Azure/GCP), Hybrid
-- Compliance Requirements: SOX, PCI DSS, GDPR, HIPAA, ISO 27001
-- Integration Needs: 150+ available connectors
-- Data Residency Requirements: US, EU, APAC regions
+STEP 1/5: Company Information Collection
+Please provide your company details for customized setup.
 
-STEP 3: Security & Risk Configuration
-- Risk Tolerance Level: Conservative, Moderate, Aggressive
-- MFA Requirements: SMS, Email, App-based, Hardware tokens
-- Access Review Frequency: Weekly, Monthly, Quarterly
-- Privileged Access Controls: Standard, Enhanced, Maximum
+Click OK to continue with technical assessment...`;
 
-STEP 4: Deployment Planning
-- Deployment Model: SaaS, Private Cloud, On-premise
-- Go-Live Timeline: 30 days, 60 days, 90 days
-- Training Requirements: Admin training, End-user training
-- Support Level: Standard, Premium, Enterprise
+            alert(welcomeMessage);
+            
+            // Step 2: Technical Assessment
+            const technicalAssessment = `📋 STEP 2/5: Technical Assessment
 
-STEP 5: Contract & Billing Setup
-- License Type: Per-user, Unlimited, Enterprise
-- Contract Term: Annual, Multi-year
-- Payment Method: Credit card, Invoice, Purchase order
-- Billing Contact: Finance team information
+Infrastructure Requirements:
+✓ Cloud Deployment (AWS/Azure/GCP) - Recommended
+✓ Hybrid Architecture Support Available
+✓ On-premise Options Available
 
-✅ Customer Onboarding Process Ready
-Next: Collect customer information and begin technical assessment.`;
+Compliance Framework Selection:
+✓ SOX, PCI DSS, GDPR, HIPAA, ISO 27001
+✓ NIST Cybersecurity Framework
+✓ Custom compliance requirements supported
 
-            alert(onboardingSteps);
-            console.log('Customer onboarding initiated:', customerData.onboardingId);
+Integration Capabilities:
+✓ 150+ pre-built connectors
+✓ Azure AD, Active Directory, Okta
+✓ Custom API integration support
+
+Click OK for security configuration...`;
+
+            setTimeout(() => alert(technicalAssessment), 1000);
+            
+            // Step 3: Security Configuration
+            setTimeout(() => {
+                const securityConfig = `🔒 STEP 3/5: Security & Risk Configuration
+
+Multi-Factor Authentication Setup:
+✓ SMS, Email, App-based authentication
+✓ Hardware token support
+✓ Biometric authentication ready
+
+Risk Management:
+✓ AI-powered risk scoring
+✓ Behavioral analytics
+✓ Real-time threat detection
+
+Access Controls:
+✓ Role-based access control (RBAC)
+✓ Privileged access management (PAM)
+✓ Zero trust network access (ZTNA)
+
+Click OK for deployment planning...`;
+                
+                alert(securityConfig);
+            }, 2000);
+            
+            // Step 4: Deployment Planning
+            setTimeout(() => {
+                const deploymentPlanning = `🚀 STEP 4/5: Deployment Planning
+
+Implementation Timeline:
+✓ Rapid deployment: 30 days
+✓ Standard deployment: 60 days  
+✓ Enterprise deployment: 90 days
+
+Training Programs:
+✓ Administrator training included
+✓ End-user training sessions
+✓ Ongoing support documentation
+
+Support Levels:
+✓ Standard Support (Business hours)
+✓ Premium Support (24/7)
+✓ Enterprise Support (Dedicated CSM)
+
+Click OK for contract setup...`;
+                
+                alert(deploymentPlanning);
+            }, 3000);
+            
+            // Step 5: Contract & Success
+            setTimeout(() => {
+                const contractSetup = `✅ STEP 5/5: Onboarding Complete!
+
+Your IDBrainQ Enterprise Setup:
+✓ Onboarding ID: ${customerData.onboardingId}
+✓ All security modules activated
+✓ 150+ integrations available
+✓ 24/7 enterprise support included
+
+Immediate Access Available:
+✓ Identity Risk Analytics
+✓ Compliance Dashboard
+✓ Authorization Graph Visualization
+✓ AI-Powered Security Insights
+
+Welcome to the IDBrainQ Enterprise Platform!
+Your identity governance transformation begins now.
+
+Contact: enterprise@idbrainq.com
+Support: support@idbrainq.com`;
+                
+                alert(contractSetup);
+                console.log('✅ Customer onboarding completed:', customerData.onboardingId);
+            }, 4000);
             
             // Store onboarding session
             localStorage.setItem('idbq_onboarding', JSON.stringify(customerData));
