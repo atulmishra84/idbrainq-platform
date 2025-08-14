@@ -361,23 +361,18 @@
                 </div>
             </div>
 
-            <!-- Single Page Dashboard -->
+            <!-- Minimal Dashboard -->
             <div id="dashboardSection" class="dashboard">
-                <!-- Header Section -->
-                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 15px; margin-bottom: 30px; color: white;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-                        <div>
-                            <h1 style="margin: 0; font-size: 32px; font-weight: 600;">🔐 IDBrainQ Enterprise Platform</h1>
-                            <p style="margin: 5px 0 0 0; font-size: 18px; opacity: 0.9;">Welcome back, <span id="userName">Administrator</span>!</p>
-                            <p style="margin: 5px 0 0 0; font-size: 14px; opacity: 0.8;">Enterprise Identity Governance & Administration - Fully Operational</p>
-                        </div>
-                        <button class="logout-btn" onclick="performLogout()" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 500; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">Secure Logout</button>
+                <!-- Simple Header with Logout -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px; padding: 0 20px;">
+                    <div>
+                        <h1 style="margin: 0; font-size: 28px; color: #333;">Welcome, <span id="userName">Administrator</span></h1>
                     </div>
+                    <button class="logout-btn" onclick="performLogout()" style="background: #dc3545; color: white; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; font-weight: 500; transition: all 0.3s ease;" onmouseover="this.style.background='#c82333'" onmouseout="this.style.background='#dc3545'">Logout</button>
                 </div>
 
-                <!-- Clean Main Dashboard -->
+                <!-- Customer Success Center Only -->
                 <div style="display: flex; justify-content: center;">
-                    <!-- Customer Center (Centered) -->
                     <div style="width: 100%; max-width: 600px;">
                         <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px; border-radius: 15px; color: white; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center;">
                             <h3 style="margin: 0 0 30px 0; font-size: 28px;">Customer Success Center</h3>
@@ -648,23 +643,8 @@
         }
 
         function addSuperAdminNavigation() {
-            const customerCenter = document.querySelector('[style*="max-width: 600px"]');
-            if (customerCenter) {
-                // Add admin panel above customer center
-                const adminPanel = `
-                    <div style="background: linear-gradient(135deg, #dc3545, #c82333); padding: 20px; border-radius: 12px; color: white; box-shadow: 0 5px 15px rgba(0,0,0,0.15); margin-bottom: 30px; text-align: center;">
-                        <div style="display: flex; align-items: center; justify-content: center; gap: 12px;">
-                            <span style="font-size: 20px;">⚙️</span>
-                            <div>
-                                <div style="font-size: 18px; font-weight: 600;">Super Admin Panel</div>
-                                <div style="font-size: 14px; opacity: 0.9;">Platform Management & System Control</div>
-                            </div>
-                            <button onclick="showPlatformOverview()" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 14px; margin-left: auto;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">Access</button>
-                        </div>
-                    </div>
-                `;
-                customerCenter.insertAdjacentHTML('beforebegin', adminPanel);
-            }
+            // Super admin functionality removed for minimal interface
+            console.log('Super admin detected - minimal interface maintained');
         }
 
         function showRegularDashboard() {
