@@ -433,6 +433,15 @@
                         <h3 style="color: #667eea; font-size: 24px; margin-bottom: 20px;">🎯 Customer Onboarding Portal</h3>
                         <button class="btn" onclick="startCustomerOnboarding()" style="background: #28a745; margin: 10px; max-width: 300px;">Onboard New Enterprise Customer</button>
                         <button class="btn" onclick="viewCustomerPortal()" style="background: #17a2b8; margin: 10px; max-width: 300px;">Customer Management Portal</button>
+                        
+                        <!-- Interactive Onboarding Display -->
+                        <div id="onboardingDisplay" style="display: none; margin-top: 30px; padding: 25px; background: white; border-radius: 10px; border: 1px solid #ddd;">
+                            <div id="onboardingContent"></div>
+                            <div style="text-align: center; margin-top: 20px;">
+                                <button id="continueBtn" class="btn" onclick="nextOnboardingStep()" style="background: #007bff; color: white; padding: 12px 30px; border: none; border-radius: 5px; cursor: pointer;">Continue</button>
+                                <button onclick="closeOnboarding()" style="background: #6c757d; color: white; padding: 12px 30px; border: none; border-radius: 5px; cursor: pointer; margin-left: 10px;">Close</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -531,124 +540,201 @@
             console.log('Module navigation:', module);
         }
         
+        let currentOnboardingStep = 0;
+        let onboardingData = {};
+
+        const onboardingSteps = [
+            {
+                title: "🎯 Welcome to IDBrainQ Enterprise Onboarding!",
+                content: `<div style="text-align: center; margin-bottom: 20px;">
+                    <h4>STEP 1/5: Company Information Collection</h4>
+                    <p><strong>Onboarding ID:</strong> <span id="onboardingId"></span></p>
+                    <p><strong>Started:</strong> <span id="startTime"></span></p>
+                </div>
+                <div style="text-align: left;">
+                    <p><strong>Please provide your company details for customized setup:</strong></p>
+                    <ul style="margin: 15px 0;">
+                        <li>Company Name & Industry</li>
+                        <li>Employee Count (100-500, 500-1000, 1000-5000, 5000+)</li>
+                        <li>Current IAM Solution (Active Directory, Okta, Azure AD, Custom)</li>
+                        <li>Geographic Locations</li>
+                    </ul>
+                </div>`
+            },
+            {
+                title: "📋 Technical Assessment",
+                content: `<div style="text-align: center; margin-bottom: 20px;">
+                    <h4>STEP 2/5: Infrastructure & Compliance Requirements</h4>
+                </div>
+                <div style="text-align: left;">
+                    <p><strong>Infrastructure Requirements:</strong></p>
+                    <ul>
+                        <li>✓ Cloud Deployment (AWS/Azure/GCP) - Recommended</li>
+                        <li>✓ Hybrid Architecture Support Available</li>
+                        <li>✓ On-premise Options Available</li>
+                    </ul>
+                    
+                    <p><strong>Compliance Framework Selection:</strong></p>
+                    <ul>
+                        <li>✓ SOX, PCI DSS, GDPR, HIPAA, ISO 27001</li>
+                        <li>✓ NIST Cybersecurity Framework</li>
+                        <li>✓ Custom compliance requirements supported</li>
+                    </ul>
+                    
+                    <p><strong>Integration Capabilities:</strong></p>
+                    <ul>
+                        <li>✓ 150+ pre-built connectors</li>
+                        <li>✓ Azure AD, Active Directory, Okta</li>
+                        <li>✓ Custom API integration support</li>
+                    </ul>
+                </div>`
+            },
+            {
+                title: "🔒 Security & Risk Configuration",
+                content: `<div style="text-align: center; margin-bottom: 20px;">
+                    <h4>STEP 3/5: Advanced Security Setup</h4>
+                </div>
+                <div style="text-align: left;">
+                    <p><strong>Multi-Factor Authentication Setup:</strong></p>
+                    <ul>
+                        <li>✓ SMS, Email, App-based authentication</li>
+                        <li>✓ Hardware token support</li>
+                        <li>✓ Biometric authentication ready</li>
+                    </ul>
+                    
+                    <p><strong>Risk Management:</strong></p>
+                    <ul>
+                        <li>✓ AI-powered risk scoring</li>
+                        <li>✓ Behavioral analytics</li>
+                        <li>✓ Real-time threat detection</li>
+                    </ul>
+                    
+                    <p><strong>Access Controls:</strong></p>
+                    <ul>
+                        <li>✓ Role-based access control (RBAC)</li>
+                        <li>✓ Privileged access management (PAM)</li>
+                        <li>✓ Zero trust network access (ZTNA)</li>
+                    </ul>
+                </div>`
+            },
+            {
+                title: "🚀 Deployment Planning",
+                content: `<div style="text-align: center; margin-bottom: 20px;">
+                    <h4>STEP 4/5: Implementation Timeline</h4>
+                </div>
+                <div style="text-align: left;">
+                    <p><strong>Implementation Timeline:</strong></p>
+                    <ul>
+                        <li>✓ Rapid deployment: 30 days</li>
+                        <li>✓ Standard deployment: 60 days</li>
+                        <li>✓ Enterprise deployment: 90 days</li>
+                    </ul>
+                    
+                    <p><strong>Training Programs:</strong></p>
+                    <ul>
+                        <li>✓ Administrator training included</li>
+                        <li>✓ End-user training sessions</li>
+                        <li>✓ Ongoing support documentation</li>
+                    </ul>
+                    
+                    <p><strong>Support Levels:</strong></p>
+                    <ul>
+                        <li>✓ Standard Support (Business hours)</li>
+                        <li>✓ Premium Support (24/7)</li>
+                        <li>✓ Enterprise Support (Dedicated CSM)</li>
+                    </ul>
+                </div>`
+            },
+            {
+                title: "✅ Onboarding Complete!",
+                content: `<div style="text-align: center; margin-bottom: 20px;">
+                    <h4>STEP 5/5: Welcome to IDBrainQ Enterprise</h4>
+                </div>
+                <div style="text-align: left;">
+                    <p><strong>Your IDBrainQ Enterprise Setup:</strong></p>
+                    <ul>
+                        <li>✓ All security modules activated</li>
+                        <li>✓ 150+ integrations available</li>
+                        <li>✓ 24/7 enterprise support included</li>
+                        <li>✓ Onboarding ID: <span id="finalOnboardingId"></span></li>
+                    </ul>
+                    
+                    <p><strong>Immediate Access Available:</strong></p>
+                    <ul>
+                        <li>✓ Identity Risk Analytics</li>
+                        <li>✓ Compliance Dashboard</li>
+                        <li>✓ Authorization Graph Visualization</li>
+                        <li>✓ AI-Powered Security Insights</li>
+                    </ul>
+                    
+                    <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; margin-top: 20px;">
+                        <p><strong>Welcome to the IDBrainQ Enterprise Platform!</strong></p>
+                        <p>Your identity governance transformation begins now.</p>
+                        <p><strong>Contact:</strong> enterprise@idbrainq.com</p>
+                        <p><strong>Support:</strong> support@idbrainq.com</p>
+                    </div>
+                </div>`
+            }
+        ];
+
         function startCustomerOnboarding() {
-            const customerData = {
+            onboardingData = {
                 step: 1,
                 timestamp: new Date().toISOString(),
                 onboardingId: 'ONB_' + Date.now()
             };
             
-            // Step 1: Welcome and Company Info
-            const welcomeMessage = `🎯 Welcome to IDBrainQ Enterprise Onboarding!
-
-Onboarding ID: ${customerData.onboardingId}
-Started: ${new Date().toLocaleString()}
-
-STEP 1/5: Company Information Collection
-Please provide your company details for customized setup.
-
-Click OK to continue with technical assessment...`;
-
-            alert(welcomeMessage);
-            
-            // Step 2: Technical Assessment
-            const technicalAssessment = `📋 STEP 2/5: Technical Assessment
-
-Infrastructure Requirements:
-✓ Cloud Deployment (AWS/Azure/GCP) - Recommended
-✓ Hybrid Architecture Support Available
-✓ On-premise Options Available
-
-Compliance Framework Selection:
-✓ SOX, PCI DSS, GDPR, HIPAA, ISO 27001
-✓ NIST Cybersecurity Framework
-✓ Custom compliance requirements supported
-
-Integration Capabilities:
-✓ 150+ pre-built connectors
-✓ Azure AD, Active Directory, Okta
-✓ Custom API integration support
-
-Click OK for security configuration...`;
-
-            setTimeout(() => alert(technicalAssessment), 1000);
-            
-            // Step 3: Security Configuration
-            setTimeout(() => {
-                const securityConfig = `🔒 STEP 3/5: Security & Risk Configuration
-
-Multi-Factor Authentication Setup:
-✓ SMS, Email, App-based authentication
-✓ Hardware token support
-✓ Biometric authentication ready
-
-Risk Management:
-✓ AI-powered risk scoring
-✓ Behavioral analytics
-✓ Real-time threat detection
-
-Access Controls:
-✓ Role-based access control (RBAC)
-✓ Privileged access management (PAM)
-✓ Zero trust network access (ZTNA)
-
-Click OK for deployment planning...`;
-                
-                alert(securityConfig);
-            }, 2000);
-            
-            // Step 4: Deployment Planning
-            setTimeout(() => {
-                const deploymentPlanning = `🚀 STEP 4/5: Deployment Planning
-
-Implementation Timeline:
-✓ Rapid deployment: 30 days
-✓ Standard deployment: 60 days  
-✓ Enterprise deployment: 90 days
-
-Training Programs:
-✓ Administrator training included
-✓ End-user training sessions
-✓ Ongoing support documentation
-
-Support Levels:
-✓ Standard Support (Business hours)
-✓ Premium Support (24/7)
-✓ Enterprise Support (Dedicated CSM)
-
-Click OK for contract setup...`;
-                
-                alert(deploymentPlanning);
-            }, 3000);
-            
-            // Step 5: Contract & Success
-            setTimeout(() => {
-                const contractSetup = `✅ STEP 5/5: Onboarding Complete!
-
-Your IDBrainQ Enterprise Setup:
-✓ Onboarding ID: ${customerData.onboardingId}
-✓ All security modules activated
-✓ 150+ integrations available
-✓ 24/7 enterprise support included
-
-Immediate Access Available:
-✓ Identity Risk Analytics
-✓ Compliance Dashboard
-✓ Authorization Graph Visualization
-✓ AI-Powered Security Insights
-
-Welcome to the IDBrainQ Enterprise Platform!
-Your identity governance transformation begins now.
-
-Contact: enterprise@idbrainq.com
-Support: support@idbrainq.com`;
-                
-                alert(contractSetup);
-                console.log('✅ Customer onboarding completed:', customerData.onboardingId);
-            }, 4000);
+            currentOnboardingStep = 0;
+            document.getElementById('onboardingDisplay').style.display = 'block';
+            showOnboardingStep();
             
             // Store onboarding session
-            localStorage.setItem('idbq_onboarding', JSON.stringify(customerData));
+            localStorage.setItem('idbq_onboarding', JSON.stringify(onboardingData));
+        }
+
+        function showOnboardingStep() {
+            const step = onboardingSteps[currentOnboardingStep];
+            document.getElementById('onboardingContent').innerHTML = 
+                `<h3 style="color: #667eea; margin-bottom: 20px;">${step.title}</h3>
+                ${step.content}`;
+            
+            // Update dynamic content
+            if (document.getElementById('onboardingId')) {
+                document.getElementById('onboardingId').textContent = onboardingData.onboardingId;
+            }
+            if (document.getElementById('startTime')) {
+                document.getElementById('startTime').textContent = new Date().toLocaleString();
+            }
+            if (document.getElementById('finalOnboardingId')) {
+                document.getElementById('finalOnboardingId').textContent = onboardingData.onboardingId;
+            }
+            
+            // Update button text
+            const continueBtn = document.getElementById('continueBtn');
+            if (currentOnboardingStep === onboardingSteps.length - 1) {
+                continueBtn.textContent = 'Complete Onboarding';
+                continueBtn.onclick = completeOnboarding;
+            } else {
+                continueBtn.textContent = 'Continue';
+                continueBtn.onclick = nextOnboardingStep;
+            }
+        }
+
+        function nextOnboardingStep() {
+            if (currentOnboardingStep < onboardingSteps.length - 1) {
+                currentOnboardingStep++;
+                showOnboardingStep();
+            }
+        }
+
+        function completeOnboarding() {
+            console.log('✅ Customer onboarding completed:', onboardingData.onboardingId);
+            document.getElementById('onboardingDisplay').style.display = 'none';
+            alert('🎉 Onboarding Complete!\n\nThank you for choosing IDBrainQ Enterprise Identity Platform.\n\nYour onboarding ID: ' + onboardingData.onboardingId + '\n\nOur team will contact you within 24 hours to begin implementation.');
+        }
+
+        function closeOnboarding() {
+            document.getElementById('onboardingDisplay').style.display = 'none';
         }
         
         function viewCustomerPortal() {
