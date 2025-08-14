@@ -1878,19 +1878,24 @@
         }
 
         function editCustomer(customerId) {
+            console.log('Edit customer called for:', customerId);
+            
             // Find the customer to edit
             const customer = customers.find(c => c.id === customerId);
             if (!customer) {
-                alert('Customer not found.');
+                alert('Customer not found: ' + customerId);
+                console.error('Customer not found in array:', customers);
                 return;
             }
+            
+            console.log('Found customer:', customer);
             
             // Create modal for customer editing
             const modal = document.createElement('div');
             modal.id = 'editCustomerModal';
             modal.style.cssText = `
                 position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-                background: rgba(0,0,0,0.5); z-index: 1000; display: flex; 
+                background: rgba(0,0,0,0.5); z-index: 99999; display: flex; 
                 align-items: center; justify-content: center; padding: 20px;
             `;
             
@@ -2012,6 +2017,7 @@
             `;
             
             document.body.appendChild(modal);
+            console.log('Edit customer modal added to DOM');
         }
 
         function closeEditCustomerModal() {
@@ -2501,6 +2507,11 @@ All monitoring systems active and reporting.`;
             localStorage.setItem('enhanced_dashboard_loaded', 'true');
             console.log('Loading enhanced dashboard for first time...');
         }
+        
+        // Make functions globally accessible for dynamic content
+        window.editCustomer = editCustomer;
+        window.closeEditCustomerModal = closeEditCustomerModal;
+        window.submitCustomerEdit = submitCustomerEdit;
     </script>
 </body>
 </html>
