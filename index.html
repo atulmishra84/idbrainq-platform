@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IDBrainQ - Identity Platform</title>
+    <title>IDBrainQ - Enhanced Enterprise Platform v2.1</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <style>
         * { 
             margin: 0; 
@@ -1727,7 +1730,14 @@ All monitoring systems active and reporting.`;
         window.addEventListener('load', optimizeForScreen);
         window.addEventListener('resize', optimizeForScreen);
         
-        console.log('IDBrainQ Enterprise Platform Ready - Auto Resolution Detection Active');
+        console.log('IDBrainQ Enhanced Enterprise Platform v2.1 Ready - Auto Resolution Detection Active');
+        console.log('Enhanced Dashboard Version 2.1 - Build:', new Date().toISOString());
+        
+        // Force page refresh on first load to ensure latest version
+        if (!localStorage.getItem('enhanced_dashboard_loaded')) {
+            localStorage.setItem('enhanced_dashboard_loaded', 'true');
+            console.log('Loading enhanced dashboard for first time...');
+        }
     </script>
 </body>
 </html>
