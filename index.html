@@ -375,57 +375,34 @@
                     </div>
                 </div>
 
-                <!-- Simplified Main Dashboard -->
-                <div style="display: grid; grid-template-columns: 1fr 350px; gap: 30px; margin-bottom: 30px;">
-                    <!-- Left: Core Features -->
-                    <div>
-                        <!-- Key Capabilities (Limited to 4) -->
-                        <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                            <h3 style="margin: 0 0 25px 0; color: #333; font-size: 24px; text-align: center;">Core Capabilities</h3>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                                <div class="nav-card" onclick="navigateToModule('identity-management')" style="padding: 25px; text-align: center; min-height: 120px; display: flex; flex-direction: column; justify-content: center;">
-                                    <div style="font-size: 36px; margin-bottom: 15px;">👥</div>
-                                    <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #333;">Identity Management</div>
-                                    <div style="font-size: 14px; color: #666;">Comprehensive user lifecycle</div>
-                                </div>
-                                <div class="nav-card" onclick="navigateToModule('access-control')" style="padding: 25px; text-align: center; min-height: 120px; display: flex; flex-direction: column; justify-content: center;">
-                                    <div style="font-size: 36px; margin-bottom: 15px;">🔐</div>
-                                    <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #333;">Access Control</div>
-                                    <div style="font-size: 14px; color: #666;">Secure authorization management</div>
-                                </div>
-                                <div class="nav-card" onclick="navigateToModule('compliance')" style="padding: 25px; text-align: center; min-height: 120px; display: flex; flex-direction: column; justify-content: center;">
-                                    <div style="font-size: 36px; margin-bottom: 15px;">✅</div>
-                                    <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #333;">Compliance</div>
-                                    <div style="font-size: 14px; color: #666;">SOX, GDPR, HIPAA monitoring</div>
-                                </div>
-                                <div class="nav-card" onclick="navigateToModule('analytics')" style="padding: 25px; text-align: center; min-height: 120px; display: flex; flex-direction: column; justify-content: center;">
-                                    <div style="font-size: 36px; margin-bottom: 15px;">📊</div>
-                                    <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #333;">Analytics</div>
-                                    <div style="font-size: 14px; color: #666;">AI-powered insights</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Right: Customer Center -->
-                    <div>
-                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 15px; color: white; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-                            <h3 style="margin: 0 0 25px 0; font-size: 22px; text-align: center;">Customer Success</h3>
+                <!-- Clean Main Dashboard -->
+                <div style="display: flex; justify-content: center;">
+                    <!-- Customer Center (Centered) -->
+                    <div style="width: 100%; max-width: 600px;">
+                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px; border-radius: 15px; color: white; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center;">
+                            <h3 style="margin: 0 0 30px 0; font-size: 28px;">Customer Success Center</h3>
                             
-                            <!-- Simple Success Metrics -->
-                            <div style="background: rgba(255,255,255,0.15); padding: 20px; border-radius: 12px; margin-bottom: 25px; text-align: center;">
-                                <div style="font-size: 28px; font-weight: bold; margin-bottom: 5px;">47+</div>
-                                <div style="opacity: 0.9; margin-bottom: 15px;">Enterprise Customers</div>
-                                <div style="font-size: 18px; font-weight: 600;">98.5% Retention</div>
+                            <!-- Success Metrics -->
+                            <div style="background: rgba(255,255,255,0.15); padding: 25px; border-radius: 12px; margin-bottom: 30px;">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: center;">
+                                    <div>
+                                        <div style="font-size: 32px; font-weight: bold; margin-bottom: 8px;">47+</div>
+                                        <div style="opacity: 0.9; font-size: 16px;">Enterprise Customers</div>
+                                    </div>
+                                    <div>
+                                        <div style="font-size: 32px; font-weight: bold; margin-bottom: 8px;">98.5%</div>
+                                        <div style="opacity: 0.9; font-size: 16px;">Customer Retention</div>
+                                    </div>
+                                </div>
                             </div>
                             
                             <!-- Main Actions -->
-                            <div style="display: grid; gap: 15px;">
-                                <button onclick="startCustomerOnboarding()" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 20px; border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 16px; transition: all 0.3s ease; text-align: center;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
-                                    🚀 Add New Customer
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                                <button onclick="startCustomerOnboarding()" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 25px; border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 16px; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 8px;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
+                                    <span style="font-size: 18px;">🚀</span> Add New Customer
                                 </button>
-                                <button onclick="viewCustomerPortal()" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 20px; border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 16px; transition: all 0.3s ease; text-align: center;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
-                                    📊 View Customers
+                                <button onclick="viewCustomerPortal()" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 25px; border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 16px; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 8px;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
+                                    <span style="font-size: 18px;">📊</span> View Customers
                                 </button>
                             </div>
                         </div>
@@ -671,17 +648,22 @@
         }
 
         function addSuperAdminNavigation() {
-            const capabilitiesGrid = document.querySelector('[style*="grid-template-columns: 1fr 1fr"]');
-            if (capabilitiesGrid) {
-                // Add super admin card to capabilities grid
-                const adminCard = `
-                    <div class="nav-card" onclick="showPlatformOverview()" style="padding: 25px; text-align: center; min-height: 120px; display: flex; flex-direction: column; justify-content: center; background: linear-gradient(135deg, #dc3545, #c82333); color: white;">
-                        <div style="font-size: 36px; margin-bottom: 15px;">⚙️</div>
-                        <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px;">Admin Panel</div>
-                        <div style="font-size: 14px; opacity: 0.9;">Platform management</div>
+            const customerCenter = document.querySelector('[style*="max-width: 600px"]');
+            if (customerCenter) {
+                // Add admin panel above customer center
+                const adminPanel = `
+                    <div style="background: linear-gradient(135deg, #dc3545, #c82333); padding: 20px; border-radius: 12px; color: white; box-shadow: 0 5px 15px rgba(0,0,0,0.15); margin-bottom: 30px; text-align: center;">
+                        <div style="display: flex; align-items: center; justify-content: center; gap: 12px;">
+                            <span style="font-size: 20px;">⚙️</span>
+                            <div>
+                                <div style="font-size: 18px; font-weight: 600;">Super Admin Panel</div>
+                                <div style="font-size: 14px; opacity: 0.9;">Platform Management & System Control</div>
+                            </div>
+                            <button onclick="showPlatformOverview()" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 14px; margin-left: auto;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">Access</button>
+                        </div>
                     </div>
                 `;
-                capabilitiesGrid.innerHTML = adminCard + capabilitiesGrid.innerHTML;
+                customerCenter.insertAdjacentHTML('beforebegin', adminPanel);
             }
         }
 
