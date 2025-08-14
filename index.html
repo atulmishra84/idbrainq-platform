@@ -428,6 +428,14 @@
                     </div>
                 </div>
 
+                <div class="customer-onboarding-section" style="margin: 50px 0;">
+                    <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 30px; border-radius: 15px; border: 2px solid #dee2e6;">
+                        <h3 style="color: #667eea; font-size: 24px; margin-bottom: 20px;">🎯 Customer Onboarding Portal</h3>
+                        <button class="btn" onclick="startCustomerOnboarding()" style="background: #28a745; margin: 10px; max-width: 300px;">Onboard New Enterprise Customer</button>
+                        <button class="btn" onclick="viewCustomerPortal()" style="background: #17a2b8; margin: 10px; max-width: 300px;">Customer Management Portal</button>
+                    </div>
+                </div>
+
                 <div class="logout-container">
                     <button class="btn logout-btn" onclick="performLogout()">Sign Out</button>
                 </div>
@@ -523,11 +531,110 @@
             console.log('Module navigation:', module);
         }
         
+        function startCustomerOnboarding() {
+            const customerData = {
+                step: 1,
+                timestamp: new Date().toISOString(),
+                onboardingId: 'ONB_' + Date.now()
+            };
+            
+            const onboardingSteps = `🎯 IDBrainQ Enterprise Customer Onboarding
+
+STEP 1: Company Information Collection
+- Company Name: [Customer Input Required]
+- Industry: Financial Services, Healthcare, Technology, Government
+- Employee Count: 100-500, 500-1000, 1000-5000, 5000+
+- Current IAM Solution: Active Directory, Okta, Azure AD, Custom
+
+STEP 2: Technical Assessment
+- Infrastructure: On-premise, Cloud (AWS/Azure/GCP), Hybrid
+- Compliance Requirements: SOX, PCI DSS, GDPR, HIPAA, ISO 27001
+- Integration Needs: 150+ available connectors
+- Data Residency Requirements: US, EU, APAC regions
+
+STEP 3: Security & Risk Configuration
+- Risk Tolerance Level: Conservative, Moderate, Aggressive
+- MFA Requirements: SMS, Email, App-based, Hardware tokens
+- Access Review Frequency: Weekly, Monthly, Quarterly
+- Privileged Access Controls: Standard, Enhanced, Maximum
+
+STEP 4: Deployment Planning
+- Deployment Model: SaaS, Private Cloud, On-premise
+- Go-Live Timeline: 30 days, 60 days, 90 days
+- Training Requirements: Admin training, End-user training
+- Support Level: Standard, Premium, Enterprise
+
+STEP 5: Contract & Billing Setup
+- License Type: Per-user, Unlimited, Enterprise
+- Contract Term: Annual, Multi-year
+- Payment Method: Credit card, Invoice, Purchase order
+- Billing Contact: Finance team information
+
+✅ Customer Onboarding Process Ready
+Next: Collect customer information and begin technical assessment.`;
+
+            alert(onboardingSteps);
+            console.log('Customer onboarding initiated:', customerData.onboardingId);
+            
+            // Store onboarding session
+            localStorage.setItem('idbq_onboarding', JSON.stringify(customerData));
+        }
+        
+        function viewCustomerPortal() {
+            const customerManagement = `🏢 IDBrainQ Customer Management Portal
+
+CURRENT CUSTOMERS (Demo Environment):
+
+1. ACME Financial Services
+   - Status: Active Production
+   - Users: 2,847 identities managed
+   - Compliance: SOX, PCI DSS compliant
+   - Contract: Enterprise license (2-year)
+   - Support: Premium 24/7 support
+   - Health Score: 98% (Excellent)
+
+2. TechCorp Industries  
+   - Status: Active Production
+   - Users: 1,203 identities managed
+   - Compliance: GDPR, ISO 27001 compliant
+   - Contract: Per-user licensing (Annual)
+   - Support: Standard support
+   - Health Score: 95% (Very Good)
+
+3. Healthcare Systems Group
+   - Status: Implementation Phase
+   - Users: 5,421 identities (migration in progress)
+   - Compliance: HIPAA, SOX compliant
+   - Contract: Enterprise unlimited (3-year)
+   - Support: Premium implementation support
+   - Health Score: 92% (Good - Implementation)
+
+CUSTOMER SUCCESS METRICS:
+- Total Enterprise Customers: 47 active
+- Average Implementation Time: 28 days
+- Customer Satisfaction Score: 4.8/5.0
+- Identity Risk Reduction: 73% average
+- Compliance Audit Success: 99.2%
+
+REVENUE METRICS:
+- Monthly Recurring Revenue: $847,000
+- Annual Contract Value Growth: +156%
+- Customer Retention Rate: 98.5%
+- Average Deal Size: $125,000/year
+
+✅ Ready to onboard your next enterprise customer
+Contact our sales team for enterprise demonstrations.`;
+
+            alert(customerManagement);
+            console.log('Customer management portal accessed');
+        }
+
         function performLogout() {
             console.log('Performing secure logout...');
             localStorage.removeItem('idbq_user');
             localStorage.removeItem('idbq_token');
             localStorage.removeItem('idbq_session');
+            localStorage.removeItem('idbq_onboarding');
             
             document.getElementById('loginSection').style.display = 'block';
             document.getElementById('dashboardSection').style.display = 'none';
