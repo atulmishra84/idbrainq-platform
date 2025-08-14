@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IDBrainQ - Enhanced Enterprise Platform v2.3 - Full Customer Registration</title>
+    <title>IDBrainQ - Enhanced Enterprise Platform v2.4 - Complete Customer Management</title>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
@@ -1878,7 +1878,201 @@
         }
 
         function editCustomer(customerId) {
-            alert(`Edit Customer: ${customerId}\n\nAdvanced customer management features:\n• Update company information\n• Modify subscription plans\n• Change billing settings\n• Manage feature access\n• Update compliance requirements\n• Configure support level\n\nFull editing interface available in production environment.`);
+            // Find the customer to edit
+            const customer = customers.find(c => c.id === customerId);
+            if (!customer) {
+                alert('Customer not found.');
+                return;
+            }
+            
+            // Create modal for customer editing
+            const modal = document.createElement('div');
+            modal.id = 'editCustomerModal';
+            modal.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+                background: rgba(0,0,0,0.5); z-index: 1000; display: flex; 
+                align-items: center; justify-content: center; padding: 20px;
+            `;
+            
+            modal.innerHTML = `
+                <div style="background: white; border-radius: 15px; max-width: 700px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+                    <!-- Header -->
+                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 25px; color: white; border-radius: 15px 15px 0 0; text-align: center;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <div style="flex: 1;"></div>
+                            <h2 style="margin: 0; font-size: 24px; font-weight: 600; flex: 2;">Edit Customer: ${customer.companyName}</h2>
+                            <div style="flex: 1; text-align: right;">
+                                <button onclick="closeEditCustomerModal()" style="background: rgba(255,255,255,0.2); border: none; color: white; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; font-size: 18px;">×</button>
+                            </div>
+                        </div>
+                        <p style="margin: 0; opacity: 0.9; font-size: 16px;">Update customer information and settings</p>
+                    </div>
+                    
+                    <!-- Form -->
+                    <form style="padding: 30px;" onsubmit="submitCustomerEdit(event, '${customerId}')">
+                        <!-- Company Information -->
+                        <div style="margin-bottom: 25px;">
+                            <h3 style="margin: 0 0 15px 0; color: #2c3e50; font-size: 18px; border-bottom: 2px solid #e9ecef; padding-bottom: 8px;">Company Information</h3>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                                <div>
+                                    <label style="display: block; margin-bottom: 5px; color: #495057; font-weight: 500; font-size: 14px;">Company Name *</label>
+                                    <input type="text" name="companyName" value="${customer.companyName}" required style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+                                </div>
+                                <div>
+                                    <label style="display: block; margin-bottom: 5px; color: #495057; font-weight: 500; font-size: 14px;">Industry *</label>
+                                    <select name="industry" required style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+                                        <option value="">Select industry</option>
+                                        <option value="Financial Services" ${customer.industry === 'Financial Services' ? 'selected' : ''}>Financial Services</option>
+                                        <option value="Healthcare" ${customer.industry === 'Healthcare' ? 'selected' : ''}>Healthcare</option>
+                                        <option value="Technology" ${customer.industry === 'Technology' ? 'selected' : ''}>Technology</option>
+                                        <option value="Manufacturing" ${customer.industry === 'Manufacturing' ? 'selected' : ''}>Manufacturing</option>
+                                        <option value="Education" ${customer.industry === 'Education' ? 'selected' : ''}>Education</option>
+                                        <option value="Government" ${customer.industry === 'Government' ? 'selected' : ''}>Government</option>
+                                        <option value="Retail" ${customer.industry === 'Retail' ? 'selected' : ''}>Retail</option>
+                                        <option value="Other" ${customer.industry === 'Other' ? 'selected' : ''}>Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                <div>
+                                    <label style="display: block; margin-bottom: 5px; color: #495057; font-weight: 500; font-size: 14px;">Employee Count *</label>
+                                    <select name="employeeCount" required style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+                                        <option value="">Select size</option>
+                                        <option value="50-100" ${customer.employeeCount === '50-100' ? 'selected' : ''}>50-100 employees</option>
+                                        <option value="100-500" ${customer.employeeCount === '100-500' ? 'selected' : ''}>100-500 employees</option>
+                                        <option value="500-1000" ${customer.employeeCount === '500-1000' ? 'selected' : ''}>500-1,000 employees</option>
+                                        <option value="1000-5000" ${customer.employeeCount === '1000-5000' ? 'selected' : ''}>1,000-5,000 employees</option>
+                                        <option value="5000+" ${customer.employeeCount === '5000+' ? 'selected' : ''}>5,000+ employees</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label style="display: block; margin-bottom: 5px; color: #495057; font-weight: 500; font-size: 14px;">Business Email *</label>
+                                    <input type="email" name="email" value="${customer.email}" required style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Information -->
+                        <div style="margin-bottom: 25px;">
+                            <h3 style="margin: 0 0 15px 0; color: #2c3e50; font-size: 18px; border-bottom: 2px solid #e9ecef; padding-bottom: 8px;">Contact Information</h3>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                <div>
+                                    <label style="display: block; margin-bottom: 5px; color: #495057; font-weight: 500; font-size: 14px;">Contact Person *</label>
+                                    <input type="text" name="contactPerson" value="${customer.contactPerson || ''}" required style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+                                </div>
+                                <div>
+                                    <label style="display: block; margin-bottom: 5px; color: #495057; font-weight: 500; font-size: 14px;">Phone Number</label>
+                                    <input type="tel" name="phone" value="${customer.phone || ''}" style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Plan & Status Management -->
+                        <div style="margin-bottom: 25px;">
+                            <h3 style="margin: 0 0 15px 0; color: #2c3e50; font-size: 18px; border-bottom: 2px solid #e9ecef; padding-bottom: 8px;">Plan & Status Management</h3>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                                <div>
+                                    <label style="display: block; margin-bottom: 5px; color: #495057; font-weight: 500; font-size: 14px;">Plan Type *</label>
+                                    <select name="planType" required style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+                                        <option value="">Select plan</option>
+                                        <option value="Enterprise" ${customer.planType === 'Enterprise' ? 'selected' : ''}>Enterprise ($45,000/year)</option>
+                                        <option value="Enterprise Plus" ${customer.planType === 'Enterprise Plus' ? 'selected' : ''}>Enterprise Plus ($75,000/year)</option>
+                                        <option value="Enterprise Premium" ${customer.planType === 'Enterprise Premium' ? 'selected' : ''}>Enterprise Premium ($120,000/year)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label style="display: block; margin-bottom: 5px; color: #495057; font-weight: 500; font-size: 14px;">Status</label>
+                                    <select name="status" style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+                                        <option value="Active" ${customer.status === 'Active' ? 'selected' : ''}>Active</option>
+                                        <option value="Onboarding" ${customer.status === 'Onboarding' ? 'selected' : ''}>Onboarding</option>
+                                        <option value="Trial" ${customer.status === 'Trial' ? 'selected' : ''}>Trial</option>
+                                        <option value="Assessment Completed" ${customer.status === 'Assessment Completed' ? 'selected' : ''}>Assessment Completed</option>
+                                        <option value="Suspended" ${customer.status === 'Suspended' ? 'selected' : ''}>Suspended</option>
+                                        <option value="Cancelled" ${customer.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 5px; color: #495057; font-weight: 500; font-size: 14px;">Health Score (0-100)</label>
+                                <input type="number" name="healthScore" value="${customer.healthScore}" min="0" max="100" style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+                            </div>
+                        </div>
+
+                        <!-- Submit Buttons -->
+                        <div style="text-align: center;">
+                            <button type="submit" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 40px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 16px; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);">
+                                ✅ Save Changes
+                            </button>
+                            <button type="button" onclick="closeEditCustomerModal()" style="background: #6c757d; color: white; padding: 15px 40px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 16px; margin-left: 15px;">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+
+        function closeEditCustomerModal() {
+            const modal = document.getElementById('editCustomerModal');
+            if (modal) modal.remove();
+        }
+
+        function submitCustomerEdit(event, customerId) {
+            event.preventDefault();
+            
+            // Collect form data
+            const formData = new FormData(event.target);
+            const updatedData = {
+                companyName: formData.get('companyName'),
+                industry: formData.get('industry'),
+                employeeCount: formData.get('employeeCount'),
+                email: formData.get('email'),
+                contactPerson: formData.get('contactPerson'),
+                phone: formData.get('phone'),
+                planType: formData.get('planType'),
+                status: formData.get('status'),
+                healthScore: parseInt(formData.get('healthScore')) || 92
+            };
+            
+            // Validate required fields
+            if (!updatedData.companyName || !updatedData.industry || !updatedData.employeeCount || !updatedData.email || !updatedData.contactPerson || !updatedData.planType) {
+                alert('Please fill in all required fields before saving changes.');
+                return;
+            }
+            
+            // Find and update customer
+            const customerIndex = customers.findIndex(c => c.id === customerId);
+            if (customerIndex !== -1) {
+                // Update customer data while preserving existing fields
+                customers[customerIndex] = {
+                    ...customers[customerIndex],
+                    ...updatedData,
+                    revenue: getPlanRevenue(updatedData.planType),
+                    identitiesManaged: estimateIdentities(updatedData.employeeCount),
+                    complianceFrameworks: getComplianceFrameworks(updatedData.industry)
+                };
+                
+                // Save to localStorage
+                localStorage.setItem('idbq_customers', JSON.stringify(customers));
+                
+                closeEditCustomerModal();
+                
+                alert(`✅ Customer Updated Successfully!
+
+Company: ${updatedData.companyName}
+Contact: ${updatedData.contactPerson}
+Plan: ${updatedData.planType}
+Status: ${updatedData.status}
+Health Score: ${updatedData.healthScore}%
+
+All changes have been saved and will be reflected in the customer management system.`);
+                
+                console.log('Customer successfully updated:', customers[customerIndex]);
+            } else {
+                alert('Error: Customer not found.');
+            }
         }
 
         function addNewCustomer() {
@@ -2299,7 +2493,7 @@ All monitoring systems active and reporting.`;
         window.addEventListener('load', optimizeForScreen);
         window.addEventListener('resize', optimizeForScreen);
         
-        console.log('IDBrainQ Enhanced Enterprise Platform v2.3 Ready - Full Customer Registration System Active');
+        console.log('IDBrainQ Enhanced Enterprise Platform v2.4 Ready - Complete Customer Management System Active');
         console.log('Enhanced Dashboard Version 2.2 - Build:', new Date().toISOString());
         
         // Force page refresh on first load to ensure latest version
