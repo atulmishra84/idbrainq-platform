@@ -1882,7 +1882,199 @@
         }
 
         function addNewCustomer() {
-            alert(`Add New Enterprise Customer\n\nCustomer onboarding process includes:\n• Company profile and verification\n• Technical requirements assessment\n• Plan selection and pricing\n• Integration configuration\n• Compliance setup\n• Training and support assignment\n\nThis opens the complete enterprise onboarding wizard.`);
+            // Create modal for new customer registration
+            const modal = document.createElement('div');
+            modal.id = 'newCustomerModal';
+            modal.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+                background: rgba(0,0,0,0.5); z-index: 1000; display: flex; 
+                align-items: center; justify-content: center; padding: 20px;
+            `;
+            
+            modal.innerHTML = `
+                <div style="background: white; border-radius: 15px; max-width: 700px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+                    <!-- Header -->
+                    <div style="background: linear-gradient(135deg, #00d4ff 0%, #5b73ff 100%); padding: 25px; color: white; border-radius: 15px 15px 0 0; text-align: center;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <div style="flex: 1;"></div>
+                            <h2 style="margin: 0; font-size: 24px; font-weight: 600; flex: 2;">Add New Enterprise Customer</h2>
+                            <div style="flex: 1; text-align: right;">
+                                <button onclick="closeNewCustomerModal()" style="background: rgba(255,255,255,0.2); border: none; color: white; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; font-size: 18px;">×</button>
+                            </div>
+                        </div>
+                        <p style="margin: 0; opacity: 0.9; font-size: 16px;">Complete customer registration form</p>
+                    </div>
+                    
+                    <!-- Form -->
+                    <form style="padding: 30px;" onsubmit="submitNewCustomer(event)">
+                        <!-- Company Information -->
+                        <div style="margin-bottom: 25px;">
+                            <h3 style="margin: 0 0 15px 0; color: #2c3e50; font-size: 18px; border-bottom: 2px solid #e9ecef; padding-bottom: 8px;">Company Information</h3>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                                <div>
+                                    <label style="display: block; margin-bottom: 5px; color: #495057; font-weight: 500; font-size: 14px;">Company Name *</label>
+                                    <input type="text" name="companyName" placeholder="Enter company name" required style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+                                </div>
+                                <div>
+                                    <label style="display: block; margin-bottom: 5px; color: #495057; font-weight: 500; font-size: 14px;">Industry *</label>
+                                    <select name="industry" required style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+                                        <option value="">Select industry</option>
+                                        <option value="Financial Services">Financial Services</option>
+                                        <option value="Healthcare">Healthcare</option>
+                                        <option value="Technology">Technology</option>
+                                        <option value="Manufacturing">Manufacturing</option>
+                                        <option value="Education">Education</option>
+                                        <option value="Government">Government</option>
+                                        <option value="Retail">Retail</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                <div>
+                                    <label style="display: block; margin-bottom: 5px; color: #495057; font-weight: 500; font-size: 14px;">Employee Count *</label>
+                                    <select name="employeeCount" required style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+                                        <option value="">Select size</option>
+                                        <option value="50-100">50-100 employees</option>
+                                        <option value="100-500">100-500 employees</option>
+                                        <option value="500-1000">500-1,000 employees</option>
+                                        <option value="1000-5000">1,000-5,000 employees</option>
+                                        <option value="5000+">5,000+ employees</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label style="display: block; margin-bottom: 5px; color: #495057; font-weight: 500; font-size: 14px;">Business Email *</label>
+                                    <input type="email" name="email" placeholder="contact@company.com" required style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Information -->
+                        <div style="margin-bottom: 25px;">
+                            <h3 style="margin: 0 0 15px 0; color: #2c3e50; font-size: 18px; border-bottom: 2px solid #e9ecef; padding-bottom: 8px;">Contact Information</h3>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                <div>
+                                    <label style="display: block; margin-bottom: 5px; color: #495057; font-weight: 500; font-size: 14px;">Contact Person *</label>
+                                    <input type="text" name="contactPerson" placeholder="Primary contact name" required style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+                                </div>
+                                <div>
+                                    <label style="display: block; margin-bottom: 5px; color: #495057; font-weight: 500; font-size: 14px;">Phone Number</label>
+                                    <input type="tel" name="phone" placeholder="+1-555-0123" style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Plan Selection -->
+                        <div style="margin-bottom: 30px;">
+                            <h3 style="margin: 0 0 15px 0; color: #2c3e50; font-size: 18px; border-bottom: 2px solid #e9ecef; padding-bottom: 8px;">Plan Selection</h3>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                <div>
+                                    <label style="display: block; margin-bottom: 5px; color: #495057; font-weight: 500; font-size: 14px;">Plan Type *</label>
+                                    <select name="planType" required style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+                                        <option value="">Select plan</option>
+                                        <option value="Enterprise">Enterprise ($45,000/year)</option>
+                                        <option value="Enterprise Plus">Enterprise Plus ($75,000/year)</option>
+                                        <option value="Enterprise Premium">Enterprise Premium ($120,000/year)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label style="display: block; margin-bottom: 5px; color: #495057; font-weight: 500; font-size: 14px;">Status</label>
+                                    <select name="status" style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+                                        <option value="Active">Active</option>
+                                        <option value="Onboarding">Onboarding</option>
+                                        <option value="Trial">Trial</option>
+                                        <option value="Assessment Completed">Assessment Completed</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div style="text-align: center;">
+                            <button type="submit" style="background: linear-gradient(135deg, #00d4ff 0%, #5b73ff 100%); color: white; padding: 15px 40px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 16px; box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);">
+                                ✅ Add Customer
+                            </button>
+                            <button type="button" onclick="closeNewCustomerModal()" style="background: #6c757d; color: white; padding: 15px 40px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 16px; margin-left: 15px;">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+
+        function closeNewCustomerModal() {
+            const modal = document.getElementById('newCustomerModal');
+            if (modal) modal.remove();
+        }
+
+        function submitNewCustomer(event) {
+            event.preventDefault();
+            
+            // Collect form data
+            const formData = new FormData(event.target);
+            const customerData = {
+                companyName: formData.get('companyName'),
+                industry: formData.get('industry'),
+                employeeCount: formData.get('employeeCount'),
+                email: formData.get('email'),
+                contactPerson: formData.get('contactPerson'),
+                phone: formData.get('phone') || '+1-555-' + Math.floor(Math.random() * 9000 + 1000),
+                planType: formData.get('planType'),
+                status: formData.get('status') || 'Active'
+            };
+            
+            // Validate required fields
+            if (!customerData.companyName || !customerData.industry || !customerData.employeeCount || !customerData.email || !customerData.contactPerson || !customerData.planType) {
+                alert('Please fill in all required fields before adding the customer.');
+                return;
+            }
+            
+            // Create new customer record
+            const newCustomer = {
+                id: 'cust_' + Date.now(),
+                companyName: customerData.companyName,
+                email: customerData.email,
+                industry: customerData.industry,
+                employeeCount: customerData.employeeCount,
+                registrationDate: new Date().toISOString().split('T')[0],
+                status: customerData.status,
+                revenue: getPlanRevenue(customerData.planType),
+                planType: customerData.planType,
+                contactPerson: customerData.contactPerson,
+                phone: customerData.phone,
+                identitiesManaged: estimateIdentities(customerData.employeeCount),
+                complianceFrameworks: getComplianceFrameworks(customerData.industry),
+                healthScore: 92 // New manually added customers start with high score
+            };
+            
+            // Add to customers array and save to localStorage
+            customers.push(newCustomer);
+            localStorage.setItem('idbq_customers', JSON.stringify(customers));
+            
+            closeNewCustomerModal();
+            
+            alert(`✅ Customer Added Successfully!
+
+Company: ${customerData.companyName}
+Contact: ${customerData.contactPerson}
+Plan: ${customerData.planType}
+Status: ${customerData.status}
+
+The new customer has been added to your customer management system and will appear in the "View Customers" portal.`);
+            
+            console.log('New customer manually added:', newCustomer);
+        }
+
+        function getPlanRevenue(planType) {
+            const revenueMap = {
+                'Enterprise': 45000,
+                'Enterprise Plus': 75000,
+                'Enterprise Premium': 120000
+            };
+            return revenueMap[planType] || 45000;
         }
 
         function exportCustomerData() {
