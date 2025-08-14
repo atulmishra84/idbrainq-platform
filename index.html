@@ -428,18 +428,77 @@
                     </div>
                 </div>
 
+                <!-- Enhanced Customer Onboarding Dashboard -->
                 <div class="customer-onboarding-section" style="margin: 50px 0;">
-                    <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 30px; border-radius: 15px; border: 2px solid #dee2e6;">
-                        <h3 style="color: #667eea; font-size: 24px; margin-bottom: 20px;">🎯 Customer Onboarding Portal</h3>
-                        <button class="btn" onclick="startCustomerOnboarding()" style="background: #28a745; margin: 10px; max-width: 300px;">Onboard New Enterprise Customer</button>
-                        <button class="btn" onclick="viewCustomerPortal()" style="background: #17a2b8; margin: 10px; max-width: 300px;">Customer Management Portal</button>
+                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                        <div style="text-align: center; margin-bottom: 30px;">
+                            <h2 style="color: white; font-size: 32px; margin-bottom: 10px; font-weight: 600;">Customer Success Center</h2>
+                            <p style="color: rgba(255,255,255,0.9); font-size: 18px; margin: 0;">Enterprise Identity Management Solutions</p>
+                        </div>
+                        
+                        <!-- Action Cards -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
+                            <div onclick="startCustomerOnboarding()" style="background: white; padding: 25px; border-radius: 15px; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.1);" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.1)'">
+                                <div style="text-align: center;">
+                                    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #28a745, #20c997); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 28px;">🚀</div>
+                                    <h3 style="color: #333; font-size: 20px; margin-bottom: 10px;">New Customer Onboarding</h3>
+                                    <p style="color: #666; font-size: 14px; line-height: 1.5;">Start your enterprise identity transformation journey with our guided 5-step process</p>
+                                </div>
+                            </div>
+                            
+                            <div onclick="viewCustomerPortal()" style="background: white; padding: 25px; border-radius: 15px; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.1);" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.1)'">
+                                <div style="text-align: center;">
+                                    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #17a2b8, #6f42c1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 28px;">📊</div>
+                                    <h3 style="color: #333; font-size: 20px; margin-bottom: 10px;">Customer Management</h3>
+                                    <p style="color: #666; font-size: 14px; line-height: 1.5;">View existing customers, success metrics, and revenue tracking dashboard</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Success Metrics Overview -->
+                        <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; backdrop-filter: blur(10px);">
+                            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center;">
+                                <div>
+                                    <div style="color: white; font-size: 24px; font-weight: bold;">$847K</div>
+                                    <div style="color: rgba(255,255,255,0.8); font-size: 14px;">Monthly Revenue</div>
+                                </div>
+                                <div>
+                                    <div style="color: white; font-size: 24px; font-weight: bold;">47+</div>
+                                    <div style="color: rgba(255,255,255,0.8); font-size: 14px;">Enterprise Customers</div>
+                                </div>
+                                <div>
+                                    <div style="color: white; font-size: 24px; font-weight: bold;">98.5%</div>
+                                    <div style="color: rgba(255,255,255,0.8); font-size: 14px;">Retention Rate</div>
+                                </div>
+                                <div>
+                                    <div style="color: white; font-size: 24px; font-weight: bold;">4.8/5</div>
+                                    <div style="color: rgba(255,255,255,0.8); font-size: 14px;">Satisfaction Score</div>
+                                </div>
+                            </div>
+                        </div>
                         
                         <!-- Interactive Onboarding Display -->
-                        <div id="onboardingDisplay" style="display: none; margin-top: 30px; padding: 25px; background: white; border-radius: 10px; border: 1px solid #ddd;">
-                            <div id="onboardingContent"></div>
-                            <div style="text-align: center; margin-top: 20px;">
-                                <button id="continueBtn" class="btn" onclick="nextOnboardingStep()" style="background: #007bff; color: white; padding: 12px 30px; border: none; border-radius: 5px; cursor: pointer;">Continue</button>
-                                <button onclick="closeOnboarding()" style="background: #6c757d; color: white; padding: 12px 30px; border: none; border-radius: 5px; cursor: pointer; margin-left: 10px;">Close</button>
+                        <div id="onboardingDisplay" style="display: none; margin-top: 30px;">
+                            <div style="background: white; border-radius: 20px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                                <!-- Progress Indicator -->
+                                <div id="progressIndicator" style="display: flex; justify-content: space-between; margin-bottom: 30px; position: relative;">
+                                    <div style="position: absolute; top: 15px; left: 0; right: 0; height: 2px; background: #e9ecef; z-index: 1;"></div>
+                                    <div id="progressBar" style="position: absolute; top: 15px; left: 0; height: 2px; background: linear-gradient(90deg, #28a745, #20c997); z-index: 2; transition: width 0.5s ease;"></div>
+                                    <div class="step-indicator active" style="width: 30px; height: 30px; border-radius: 50%; background: #28a745; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; z-index: 3; position: relative;">1</div>
+                                    <div class="step-indicator" style="width: 30px; height: 30px; border-radius: 50%; background: #e9ecef; color: #6c757d; display: flex; align-items: center; justify-content: center; font-weight: bold; z-index: 3; position: relative;">2</div>
+                                    <div class="step-indicator" style="width: 30px; height: 30px; border-radius: 50%; background: #e9ecef; color: #6c757d; display: flex; align-items: center; justify-content: center; font-weight: bold; z-index: 3; position: relative;">3</div>
+                                    <div class="step-indicator" style="width: 30px; height: 30px; border-radius: 50%; background: #e9ecef; color: #6c757d; display: flex; align-items: center; justify-content: center; font-weight: bold; z-index: 3; position: relative;">4</div>
+                                    <div class="step-indicator" style="width: 30px; height: 30px; border-radius: 50%; background: #e9ecef; color: #6c757d; display: flex; align-items: center; justify-content: center; font-weight: bold; z-index: 3; position: relative;">5</div>
+                                </div>
+                                
+                                <div id="onboardingContent"></div>
+                                
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e9ecef;">
+                                    <button id="backBtn" onclick="previousOnboardingStep()" style="background: #6c757d; color: white; padding: 12px 25px; border: none; border-radius: 8px; cursor: pointer; font-weight: 500; transition: background 0.3s ease; display: none;">← Back</button>
+                                    <div style="flex: 1;"></div>
+                                    <button id="continueBtn" onclick="nextOnboardingStep()" style="background: linear-gradient(135deg, #007bff, #0056b3); color: white; padding: 12px 30px; border: none; border-radius: 8px; cursor: pointer; font-weight: 500; transition: transform 0.2s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">Continue →</button>
+                                    <button onclick="closeOnboarding()" style="background: transparent; color: #6c757d; padding: 12px 20px; border: 1px solid #dee2e6; border-radius: 8px; cursor: pointer; margin-left: 15px; transition: all 0.3s ease;" onmouseover="this.style.background='#f8f9fa'" onmouseout="this.style.background='transparent'">Close</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -739,8 +798,11 @@
         function showOnboardingStep() {
             const step = onboardingSteps[currentOnboardingStep];
             document.getElementById('onboardingContent').innerHTML = 
-                `<h3 style="color: #667eea; margin-bottom: 20px;">${step.title}</h3>
+                `<h3 style="color: #333; margin-bottom: 20px; font-size: 24px;">${step.title}</h3>
                 ${step.content}`;
+            
+            // Update progress indicator
+            updateProgressIndicator();
             
             // Update dynamic content
             if (document.getElementById('onboardingId')) {
@@ -753,14 +815,53 @@
                 document.getElementById('finalOnboardingId').textContent = onboardingData.onboardingId;
             }
             
-            // Update button text
+            // Update navigation buttons
             const continueBtn = document.getElementById('continueBtn');
-            if (currentOnboardingStep === onboardingSteps.length - 1) {
-                continueBtn.textContent = 'Complete Onboarding';
-                continueBtn.onclick = completeOnboarding;
+            const backBtn = document.getElementById('backBtn');
+            
+            // Show/hide back button
+            if (currentOnboardingStep > 0) {
+                backBtn.style.display = 'block';
             } else {
-                continueBtn.textContent = 'Continue';
+                backBtn.style.display = 'none';
+            }
+            
+            // Update continue button
+            if (currentOnboardingStep === onboardingSteps.length - 1) {
+                continueBtn.innerHTML = '🎉 Complete Onboarding';
+                continueBtn.onclick = completeOnboarding;
+                continueBtn.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
+            } else {
+                continueBtn.innerHTML = 'Continue →';
                 continueBtn.onclick = nextOnboardingStep;
+                continueBtn.style.background = 'linear-gradient(135deg, #007bff, #0056b3)';
+            }
+        }
+
+        function updateProgressIndicator() {
+            const indicators = document.querySelectorAll('.step-indicator');
+            const progressBar = document.getElementById('progressBar');
+            
+            // Update step indicators
+            indicators.forEach((indicator, index) => {
+                if (index <= currentOnboardingStep) {
+                    indicator.style.background = '#28a745';
+                    indicator.style.color = 'white';
+                } else {
+                    indicator.style.background = '#e9ecef';
+                    indicator.style.color = '#6c757d';
+                }
+            });
+            
+            // Update progress bar width
+            const progressPercent = (currentOnboardingStep / (onboardingSteps.length - 1)) * 100;
+            progressBar.style.width = progressPercent + '%';
+        }
+
+        function previousOnboardingStep() {
+            if (currentOnboardingStep > 0) {
+                currentOnboardingStep--;
+                showOnboardingStep();
             }
         }
 
