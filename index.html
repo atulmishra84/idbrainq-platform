@@ -314,17 +314,17 @@
         
         /* Single Page Layout Responsive */
         @media (max-width: 1024px) {
-            .single-page-grid { 
+            .main-dashboard-grid { 
                 grid-template-columns: 1fr !important; 
                 gap: 20px !important; 
             }
         }
         @media (max-width: 768px) {
-            .stats-container { 
-                grid-template-columns: repeat(2, 1fr) !important; 
+            .capabilities-grid { 
+                grid-template-columns: 1fr !important; 
                 gap: 15px !important; 
             }
-            .single-page-header {
+            .dashboard-header {
                 flex-direction: column !important;
                 text-align: center !important;
                 gap: 15px !important;
@@ -375,144 +375,57 @@
                     </div>
                 </div>
 
-                <!-- Main Content Grid -->
-                <div style="display: grid; grid-template-columns: 1fr 400px; gap: 30px; margin-bottom: 30px;">
-                    <!-- Left Column: Stats and Enterprise Modules -->
+                <!-- Simplified Main Dashboard -->
+                <div style="display: grid; grid-template-columns: 1fr 350px; gap: 30px; margin-bottom: 30px;">
+                    <!-- Left: Core Features -->
                     <div>
-                        <!-- Performance Stats -->
-                        <div class="stats-container" style="margin-bottom: 30px;">
-                            <div class="stat-card">
-                                <div class="stat-number">1,247</div>
-                                <div class="stat-label">Total Identities</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-number">892</div>
-                                <div class="stat-label">Active Users</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-number">23</div>
-                                <div class="stat-label">Risk Alerts</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-number">156</div>
-                                <div class="stat-label">Compliance Scans</div>
-                            </div>
-                        </div>
-                        
-                        <!-- Enterprise Modules Section -->
-                        <div style="background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 30px;">
-                            <h3 style="margin: 0 0 20px 0; color: #333; font-size: 20px;">🎯 Enterprise Identity Modules</h3>
-                            <div class="navigation-grid" style="grid-template-columns: repeat(2, 1fr); gap: 15px;">
-                                <div class="nav-card" onclick="navigateToModule('authorization-graph')" style="padding: 15px;">
-                                    <div style="display: flex; align-items: center;">
-                                        <div class="nav-icon" style="margin-right: 12px; font-size: 20px;">🔗</div>
-                                        <div>
-                                            <div class="nav-title" style="font-size: 14px;">Authorization Graph</div>
-                                            <div class="nav-desc" style="font-size: 11px;">Visualize access relationships</div>
-                                        </div>
-                                    </div>
+                        <!-- Key Capabilities (Limited to 4) -->
+                        <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                            <h3 style="margin: 0 0 25px 0; color: #333; font-size: 24px; text-align: center;">Core Capabilities</h3>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                                <div class="nav-card" onclick="navigateToModule('identity-management')" style="padding: 25px; text-align: center; min-height: 120px; display: flex; flex-direction: column; justify-content: center;">
+                                    <div style="font-size: 36px; margin-bottom: 15px;">👥</div>
+                                    <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #333;">Identity Management</div>
+                                    <div style="font-size: 14px; color: #666;">Comprehensive user lifecycle</div>
                                 </div>
-                                <div class="nav-card" onclick="navigateToModule('risk-analytics')" style="padding: 15px;">
-                                    <div style="display: flex; align-items: center;">
-                                        <div class="nav-icon" style="margin-right: 12px; font-size: 20px;">📊</div>
-                                        <div>
-                                            <div class="nav-title" style="font-size: 14px;">Risk Analytics</div>
-                                            <div class="nav-desc" style="font-size: 11px;">AI-powered risk assessment</div>
-                                        </div>
-                                    </div>
+                                <div class="nav-card" onclick="navigateToModule('access-control')" style="padding: 25px; text-align: center; min-height: 120px; display: flex; flex-direction: column; justify-content: center;">
+                                    <div style="font-size: 36px; margin-bottom: 15px;">🔐</div>
+                                    <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #333;">Access Control</div>
+                                    <div style="font-size: 14px; color: #666;">Secure authorization management</div>
                                 </div>
-                                <div class="nav-card" onclick="navigateToModule('compliance')" style="padding: 15px;">
-                                    <div style="display: flex; align-items: center;">
-                                        <div class="nav-icon" style="margin-right: 12px; font-size: 20px;">✅</div>
-                                        <div>
-                                            <div class="nav-title" style="font-size: 14px;">Compliance</div>
-                                            <div class="nav-desc" style="font-size: 11px;">SOX, GDPR, HIPAA monitoring</div>
-                                        </div>
-                                    </div>
+                                <div class="nav-card" onclick="navigateToModule('compliance')" style="padding: 25px; text-align: center; min-height: 120px; display: flex; flex-direction: column; justify-content: center;">
+                                    <div style="font-size: 36px; margin-bottom: 15px;">✅</div>
+                                    <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #333;">Compliance</div>
+                                    <div style="font-size: 14px; color: #666;">SOX, GDPR, HIPAA monitoring</div>
                                 </div>
-                                <div class="nav-card" onclick="navigateToModule('access-pathways')" style="padding: 15px;">
-                                    <div style="display: flex; align-items: center;">
-                                        <div class="nav-icon" style="margin-right: 12px; font-size: 20px;">🛤️</div>
-                                        <div>
-                                            <div class="nav-title" style="font-size: 14px;">Access Pathways</div>
-                                            <div class="nav-desc" style="font-size: 11px;">Analyze access patterns</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="nav-card" onclick="navigateToModule('security-insights')" style="padding: 15px;">
-                                    <div style="display: flex; align-items: center;">
-                                        <div class="nav-icon" style="margin-right: 12px; font-size: 20px;">🔍</div>
-                                        <div>
-                                            <div class="nav-title" style="font-size: 14px;">Security Insights</div>
-                                            <div class="nav-desc" style="font-size: 11px;">ML security recommendations</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="nav-card" onclick="navigateToModule('ai-agents')" style="padding: 15px;">
-                                    <div style="display: flex; align-items: center;">
-                                        <div class="nav-icon" style="margin-right: 12px; font-size: 20px;">🤖</div>
-                                        <div>
-                                            <div class="nav-title" style="font-size: 14px;">AI Agents</div>
-                                            <div class="nav-desc" style="font-size: 11px;">Control AI agent access</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="nav-card" onclick="navigateToModule('identity-lifecycle')" style="padding: 15px;">
-                                    <div style="display: flex; align-items: center;">
-                                        <div class="nav-icon" style="margin-right: 12px; font-size: 20px;">👥</div>
-                                        <div>
-                                            <div class="nav-title" style="font-size: 14px;">Identity Lifecycle</div>
-                                            <div class="nav-desc" style="font-size: 11px;">Complete identity workflows</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="nav-card" onclick="navigateToModule('integrations')" style="padding: 15px;">
-                                    <div style="display: flex; align-items: center;">
-                                        <div class="nav-icon" style="margin-right: 12px; font-size: 20px;">🔧</div>
-                                        <div>
-                                            <div class="nav-title" style="font-size: 14px;">Integrations</div>
-                                            <div class="nav-desc" style="font-size: 11px;">150+ enterprise connectors</div>
-                                        </div>
-                                    </div>
+                                <div class="nav-card" onclick="navigateToModule('analytics')" style="padding: 25px; text-align: center; min-height: 120px; display: flex; flex-direction: column; justify-content: center;">
+                                    <div style="font-size: 36px; margin-bottom: 15px;">📊</div>
+                                    <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #333;">Analytics</div>
+                                    <div style="font-size: 14px; color: #666;">AI-powered insights</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- Right Column: Customer Success Center -->
+                    <!-- Right: Customer Center -->
                     <div>
-                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 25px; border-radius: 15px; color: white; box-shadow: 0 10px 30px rgba(0,0,0,0.1); height: fit-content;">
-                            <h3 style="margin: 0 0 20px 0; font-size: 20px; text-align: center;">Customer Success Center</h3>
+                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 15px; color: white; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                            <h3 style="margin: 0 0 25px 0; font-size: 22px; text-align: center;">Customer Success</h3>
                             
-                            <!-- Success Metrics -->
-                            <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; backdrop-filter: blur(10px); margin-bottom: 20px;">
-                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; text-align: center; font-size: 14px;">
-                                    <div>
-                                        <div style="font-size: 18px; font-weight: bold;">$847K</div>
-                                        <div style="opacity: 0.8;">Monthly Revenue</div>
-                                    </div>
-                                    <div>
-                                        <div style="font-size: 18px; font-weight: bold;">47+</div>
-                                        <div style="opacity: 0.8;">Customers</div>
-                                    </div>
-                                    <div>
-                                        <div style="font-size: 18px; font-weight: bold;">98.5%</div>
-                                        <div style="opacity: 0.8;">Retention</div>
-                                    </div>
-                                    <div>
-                                        <div style="font-size: 18px; font-weight: bold;">4.8/5</div>
-                                        <div style="opacity: 0.8;">Satisfaction</div>
-                                    </div>
-                                </div>
+                            <!-- Simple Success Metrics -->
+                            <div style="background: rgba(255,255,255,0.15); padding: 20px; border-radius: 12px; margin-bottom: 25px; text-align: center;">
+                                <div style="font-size: 28px; font-weight: bold; margin-bottom: 5px;">47+</div>
+                                <div style="opacity: 0.9; margin-bottom: 15px;">Enterprise Customers</div>
+                                <div style="font-size: 18px; font-weight: 600;">98.5% Retention</div>
                             </div>
                             
-                            <!-- Action Buttons -->
-                            <div style="display: grid; gap: 12px;">
-                                <button onclick="startCustomerOnboarding()" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 15px; border-radius: 10px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; text-align: center;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
-                                    🚀 New Customer Onboarding
+                            <!-- Main Actions -->
+                            <div style="display: grid; gap: 15px;">
+                                <button onclick="startCustomerOnboarding()" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 20px; border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 16px; transition: all 0.3s ease; text-align: center;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
+                                    🚀 Add New Customer
                                 </button>
-                                <button onclick="viewCustomerPortal()" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 15px; border-radius: 10px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; text-align: center;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
-                                    📊 Customer Management
+                                <button onclick="viewCustomerPortal()" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 20px; border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 16px; transition: all 0.3s ease; text-align: center;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
+                                    📊 View Customers
                                 </button>
                             </div>
                         </div>
@@ -758,42 +671,17 @@
         }
 
         function addSuperAdminNavigation() {
-            const navigationGrid = document.querySelector('.navigation-grid');
-            if (navigationGrid) {
-                // Add super admin specific cards at the beginning
-                const superAdminCards = `
-                    <div class="nav-card" onclick="showPlatformOverview()" style="background: linear-gradient(135deg, #dc3545, #c82333); color: white;">
-                        <div style="display: flex; align-items: center;">
-                            <div class="nav-icon">🔧</div>
-                            <div>
-                                <div class="nav-title">Platform Administration</div>
-                                <div class="nav-desc">System management, user access control, and platform configuration</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="nav-card" onclick="showTenantManagement()" style="background: linear-gradient(135deg, #6f42c1, #5a32a3); color: white;">
-                        <div style="display: flex; align-items: center;">
-                            <div class="nav-icon">🏢</div>
-                            <div>
-                                <div class="nav-title">Multi-Tenant Management</div>
-                                <div class="nav-desc">Manage 156 active tenants, data isolation, and billing</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="nav-card" onclick="showSystemMonitoring()" style="background: linear-gradient(135deg, #17a2b8, #138496); color: white;">
-                        <div style="display: flex; align-items: center;">
-                            <div class="nav-icon">📊</div>
-                            <div>
-                                <div class="nav-title">System Monitoring</div>
-                                <div class="nav-desc">Real-time platform health, performance metrics, and alerts</div>
-                            </div>
-                        </div>
+            const capabilitiesGrid = document.querySelector('[style*="grid-template-columns: 1fr 1fr"]');
+            if (capabilitiesGrid) {
+                // Add super admin card to capabilities grid
+                const adminCard = `
+                    <div class="nav-card" onclick="showPlatformOverview()" style="padding: 25px; text-align: center; min-height: 120px; display: flex; flex-direction: column; justify-content: center; background: linear-gradient(135deg, #dc3545, #c82333); color: white;">
+                        <div style="font-size: 36px; margin-bottom: 15px;">⚙️</div>
+                        <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px;">Admin Panel</div>
+                        <div style="font-size: 14px; opacity: 0.9;">Platform management</div>
                     </div>
                 `;
-                
-                navigationGrid.innerHTML = superAdminCards + navigationGrid.innerHTML;
+                capabilitiesGrid.innerHTML = adminCard + capabilitiesGrid.innerHTML;
             }
         }
 
