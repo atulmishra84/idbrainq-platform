@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IDBrainQ - Enhanced Enterprise Platform v2.2 - Customer Management</title>
+    <title>IDBrainQ - Enhanced Enterprise Platform v2.3 - Full Customer Registration</title>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
@@ -1265,11 +1265,27 @@
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
                                 <div>
                                     <label style="display: block; margin-bottom: 8px; color: #495057; font-weight: 500; font-size: 14px;">Company Name *</label>
-                                    <input type="text" placeholder="Enter company name" required style="width: 100%; padding: 12px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 16px; box-sizing: border-box; transition: all 0.3s ease;" onfocus="this.style.borderColor='#28a745'; this.style.boxShadow='0 0 0 3px rgba(40, 167, 69, 0.1)'" onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
+                                    <input type="text" name="companyName" placeholder="Enter company name" required style="width: 100%; padding: 12px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 16px; box-sizing: border-box; transition: all 0.3s ease;" onfocus="this.style.borderColor='#28a745'; this.style.boxShadow='0 0 0 3px rgba(40, 167, 69, 0.1)'" onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
                                 </div>
                                 <div>
+                                    <label style="display: block; margin-bottom: 8px; color: #495057; font-weight: 500; font-size: 14px;">Industry *</label>
+                                    <select name="industry" required style="width: 100%; padding: 12px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 16px; box-sizing: border-box; transition: all 0.3s ease;" onfocus="this.style.borderColor='#28a745'; this.style.boxShadow='0 0 0 3px rgba(40, 167, 69, 0.1)'" onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
+                                        <option value="">Select industry</option>
+                                        <option value="Financial Services">Financial Services</option>
+                                        <option value="Healthcare">Healthcare</option>
+                                        <option value="Technology">Technology</option>
+                                        <option value="Manufacturing">Manufacturing</option>
+                                        <option value="Education">Education</option>
+                                        <option value="Government">Government</option>
+                                        <option value="Retail">Retail</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                                <div>
                                     <label style="display: block; margin-bottom: 8px; color: #495057; font-weight: 500; font-size: 14px;">Employee Count *</label>
-                                    <select required style="width: 100%; padding: 12px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 16px; box-sizing: border-box; transition: all 0.3s ease;" onfocus="this.style.borderColor='#28a745'; this.style.boxShadow='0 0 0 3px rgba(40, 167, 69, 0.1)'" onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
+                                    <select name="employeeCount" required style="width: 100%; padding: 12px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 16px; box-sizing: border-box; transition: all 0.3s ease;" onfocus="this.style.borderColor='#28a745'; this.style.boxShadow='0 0 0 3px rgba(40, 167, 69, 0.1)'" onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
                                         <option value="">Select employee count</option>
                                         <option value="100-500">100-500 employees</option>
                                         <option value="500-1000">500-1,000 employees</option>
@@ -1277,10 +1293,10 @@
                                         <option value="5000+">5,000+ employees</option>
                                     </select>
                                 </div>
-                            </div>
-                            <div>
-                                <label style="display: block; margin-bottom: 8px; color: #495057; font-weight: 500; font-size: 14px;">Business Email *</label>
-                                <input type="email" placeholder="your.name@company.com" required style="width: 100%; padding: 12px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 16px; box-sizing: border-box; transition: all 0.3s ease;" onfocus="this.style.borderColor='#28a745'; this.style.boxShadow='0 0 0 3px rgba(40, 167, 69, 0.1)'" onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
+                                <div>
+                                    <label style="display: block; margin-bottom: 8px; color: #495057; font-weight: 500; font-size: 14px;">Business Email *</label>
+                                    <input type="email" name="email" placeholder="your.name@company.com" required style="width: 100%; padding: 12px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 16px; box-sizing: border-box; transition: all 0.3s ease;" onfocus="this.style.borderColor='#28a745'; this.style.boxShadow='0 0 0 3px rgba(40, 167, 69, 0.1)'" onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
+                                </div>
                             </div>
                         </div>
 
@@ -1290,7 +1306,7 @@
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                                 <div>
                                     <label style="display: block; margin-bottom: 8px; color: #495057; font-weight: 500; font-size: 14px;">Primary Directory *</label>
-                                    <select required style="width: 100%; padding: 12px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 16px; box-sizing: border-box; transition: all 0.3s ease;" onfocus="this.style.borderColor='#28a745'; this.style.boxShadow='0 0 0 3px rgba(40, 167, 69, 0.1)'" onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
+                                    <select name="primaryDirectory" required style="width: 100%; padding: 12px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 16px; box-sizing: border-box; transition: all 0.3s ease;" onfocus="this.style.borderColor='#28a745'; this.style.boxShadow='0 0 0 3px rgba(40, 167, 69, 0.1)'" onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
                                         <option value="">Select primary directory</option>
                                         <option value="azure-ad">Microsoft Azure AD</option>
                                         <option value="active-directory">Active Directory</option>
@@ -1301,7 +1317,7 @@
                                 </div>
                                 <div>
                                     <label style="display: block; margin-bottom: 8px; color: #495057; font-weight: 500; font-size: 14px;">Applications Count *</label>
-                                    <select required style="width: 100%; padding: 12px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 16px; box-sizing: border-box; transition: all 0.3s ease;" onfocus="this.style.borderColor='#28a745'; this.style.boxShadow='0 0 0 3px rgba(40, 167, 69, 0.1)'" onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
+                                    <select name="applicationCount" required style="width: 100%; padding: 12px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 16px; box-sizing: border-box; transition: all 0.3s ease;" onfocus="this.style.borderColor='#28a745'; this.style.boxShadow='0 0 0 3px rgba(40, 167, 69, 0.1)'" onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
                                         <option value="">Select application count</option>
                                         <option value="10-50">10-50 applications</option>
                                         <option value="50-100">50-100 applications</option>
@@ -1340,7 +1356,7 @@
                         <div style="margin-bottom: 35px;">
                             <h3 style="margin: 0 0 20px 0; color: #2c3e50; font-size: 18px; font-weight: 600; border-bottom: 2px solid #e9ecef; padding-bottom: 8px;">Implementation Timeline</h3>
                             <label style="display: block; margin-bottom: 8px; color: #495057; font-weight: 500; font-size: 14px;">Preferred Timeline *</label>
-                            <select required style="width: 100%; padding: 12px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 16px; box-sizing: border-box; transition: all 0.3s ease;" onfocus="this.style.borderColor='#28a745'; this.style.boxShadow='0 0 0 3px rgba(40, 167, 69, 0.1)'" onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
+                            <select name="timeline" required style="width: 100%; padding: 12px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 16px; box-sizing: border-box; transition: all 0.3s ease;" onfocus="this.style.borderColor='#28a745'; this.style.boxShadow='0 0 0 3px rgba(40, 167, 69, 0.1)'" onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
                                 <option value="">Select your preferred timeline</option>
                                 <option value="immediate">Immediate (1-3 months)</option>
                                 <option value="near-term">Near-term (3-6 months)</option>
@@ -1370,12 +1386,59 @@
 
         function submitEnterpriseAssessment(event) {
             event.preventDefault();
+            
+            // Collect form data
+            const formData = new FormData(event.target);
+            const assessmentData = {
+                companyName: formData.get('companyName'),
+                industry: formData.get('industry'),
+                employeeCount: formData.get('employeeCount'),
+                primaryDirectory: formData.get('primaryDirectory'),
+                applicationCount: formData.get('applicationCount'),
+                email: formData.get('email'),
+                timeline: formData.get('timeline'),
+                priorities: formData.getAll('priorities')
+            };
+            
+            // Validate required fields
+            if (!assessmentData.companyName || !assessmentData.industry || !assessmentData.employeeCount || !assessmentData.email) {
+                alert('Please fill in all required fields before submitting the assessment.');
+                return;
+            }
+            
             closeAssessmentModal();
             
             // Generate unique assessment ID
             const assessmentId = 'ASS_' + Date.now();
             
-            alert(`Enterprise Assessment Submitted Successfully!\n\nAssessment ID: ${assessmentId}\n\nNext Steps:\n\n1. Technical Discovery Call (Within 48 hours)\n   • Deep-dive into your current IAM architecture\n   • Security gap analysis and risk assessment\n\n2. Custom Implementation Plan (Week 1)\n   • Tailored 4-phase deployment roadmap\n   • Resource allocation and timeline planning\n\n3. Professional Services Proposal (Week 2)\n   • Detailed service engagement options\n   • Investment and ROI projections\n\nOur Enterprise Solutions team will contact you within 24 hours to schedule your discovery call.\n\nThank you for choosing IDBrainQ Enterprise!`);
+            // Create new customer record from assessment data
+            const newCustomer = {
+                id: 'cust_' + Date.now(),
+                companyName: assessmentData.companyName,
+                email: assessmentData.email,
+                industry: assessmentData.industry,
+                employeeCount: assessmentData.employeeCount,
+                registrationDate: new Date().toISOString().split('T')[0],
+                status: 'Assessment Completed',
+                revenue: generateInitialRevenue(assessmentData.employeeCount),
+                planType: determinePlanType(assessmentData.employeeCount),
+                contactPerson: 'Assessment Contact',
+                phone: '+1-555-' + Math.floor(Math.random() * 9000 + 1000),
+                identitiesManaged: estimateIdentities(assessmentData.employeeCount),
+                complianceFrameworks: getComplianceFrameworks(assessmentData.industry),
+                healthScore: 88,
+                assessmentId: assessmentId,
+                priorities: assessmentData.priorities,
+                timeline: assessmentData.timeline
+            };
+            
+            // Add to customers array and save to localStorage
+            customers.push(newCustomer);
+            localStorage.setItem('idbq_customers', JSON.stringify(customers));
+            
+            console.log('New customer added from assessment:', newCustomer);
+            
+            alert(`Enterprise Assessment Submitted Successfully!\n\nAssessment ID: ${assessmentId}\nCompany: ${assessmentData.companyName}\n\nNext Steps:\n\n1. Technical Discovery Call (Within 48 hours)\n   • Deep-dive into your current IAM architecture\n   • Security gap analysis and risk assessment\n\n2. Custom Implementation Plan (Week 1)\n   • Tailored 4-phase deployment roadmap\n   • Resource allocation and timeline planning\n\n3. Professional Services Proposal (Week 2)\n   • Detailed service engagement options\n   • Investment and ROI projections\n\n✅ Customer record created in management system\n\nOur Enterprise Solutions team will contact you within 24 hours to schedule your discovery call.\n\nThank you for choosing IDBrainQ Enterprise!`);
         }
 
         function showOnboardingStep() {
@@ -1489,12 +1552,81 @@
             const customerName = onboardingData.customerInfo?.companyName || 'Enterprise Customer';
             const industry = onboardingData.customerInfo?.industry || 'your industry';
             
+            // Create new customer record for customer management system
+            if (onboardingData.customerInfo) {
+                const newCustomer = {
+                    id: 'cust_' + Date.now(),
+                    companyName: onboardingData.customerInfo.companyName,
+                    email: `contact@${onboardingData.customerInfo.companyName.toLowerCase().replace(/[^a-z0-9]/g, '')}.com`,
+                    industry: onboardingData.customerInfo.industry,
+                    employeeCount: onboardingData.customerInfo.employeeCount,
+                    registrationDate: new Date().toISOString().split('T')[0],
+                    status: 'Onboarding',
+                    revenue: generateInitialRevenue(onboardingData.customerInfo.employeeCount),
+                    planType: determinePlanType(onboardingData.customerInfo.employeeCount),
+                    contactPerson: 'New Customer Contact',
+                    phone: '+1-555-' + Math.floor(Math.random() * 9000 + 1000),
+                    identitiesManaged: estimateIdentities(onboardingData.customerInfo.employeeCount),
+                    complianceFrameworks: getComplianceFrameworks(onboardingData.customerInfo.industry),
+                    healthScore: 85 // Initial health score for new customers
+                };
+                
+                // Add to customers array and save to localStorage
+                customers.push(newCustomer);
+                localStorage.setItem('idbq_customers', JSON.stringify(customers));
+                
+                console.log('New customer added to management system:', newCustomer);
+            }
+            
             document.getElementById('onboardingDisplay').style.display = 'none';
             
-            alert(`🎉 Welcome ${customerName}!\n\nOnboarding Complete for ${industry} industry.\n\nOnboarding ID: ${onboardingData.onboardingId}\n\nYour IDBrainQ Enterprise setup is ready. Our specialized ${industry} team will contact you within 24 hours to begin implementation.\n\nNext Steps:\n✓ Technical assessment scheduled\n✓ Custom integration planning\n✓ Dedicated customer success manager assigned\n\nContact: enterprise@idbrainq.com`);
+            alert(`🎉 Welcome ${customerName}!\n\nOnboarding Complete for ${industry} industry.\n\nOnboarding ID: ${onboardingData.onboardingId}\n\nYour IDBrainQ Enterprise setup is ready. Our specialized ${industry} team will contact you within 24 hours to begin implementation.\n\nNext Steps:\n✓ Technical assessment scheduled\n✓ Custom integration planning\n✓ Dedicated customer success manager assigned\n✓ Customer record created in management system\n\nContact: enterprise@idbrainq.com`);
             
             // Store complete onboarding data
             localStorage.setItem('idbq_completed_onboarding', JSON.stringify(onboardingData));
+        }
+
+        // Helper functions for new customer creation
+        function generateInitialRevenue(employeeCount) {
+            const revenueMap = {
+                '50-100': Math.floor(Math.random() * 10000) + 15000,
+                '100-500': Math.floor(Math.random() * 20000) + 25000,
+                '500-1000': Math.floor(Math.random() * 25000) + 40000,
+                '1000-5000': Math.floor(Math.random() * 30000) + 60000,
+                '5000+': Math.floor(Math.random() * 40000) + 80000
+            };
+            return revenueMap[employeeCount] || 20000;
+        }
+
+        function determinePlanType(employeeCount) {
+            if (employeeCount === '5000+' || employeeCount === '1000-5000') {
+                return 'Enterprise Plus';
+            }
+            return 'Enterprise';
+        }
+
+        function estimateIdentities(employeeCount) {
+            const identityMap = {
+                '50-100': Math.floor(Math.random() * 200) + 150,
+                '100-500': Math.floor(Math.random() * 800) + 300,
+                '500-1000': Math.floor(Math.random() * 1000) + 800,
+                '1000-5000': Math.floor(Math.random() * 3000) + 1500,
+                '5000+': Math.floor(Math.random() * 5000) + 3000
+            };
+            return identityMap[employeeCount] || 500;
+        }
+
+        function getComplianceFrameworks(industry) {
+            const frameworkMap = {
+                'Financial Services': ['SOX', 'PCI DSS'],
+                'Healthcare': ['HIPAA', 'SOX'],
+                'Technology': ['GDPR', 'ISO 27001'],
+                'Manufacturing': ['ISO 27001', 'NIST'],
+                'Education': ['FERPA', 'GDPR'],
+                'Government': ['FedRAMP', 'NIST'],
+                'Retail': ['PCI DSS', 'GDPR']
+            };
+            return frameworkMap[industry] || ['ISO 27001', 'GDPR'];
         }
 
         function closeOnboarding() {
@@ -1586,6 +1718,9 @@
         ];
 
         function viewCustomerPortal() {
+            // Refresh customer data from localStorage
+            customers = JSON.parse(localStorage.getItem('idbq_customers')) || customers;
+            
             // Create modal for customer management
             const modal = document.createElement('div');
             modal.id = 'customerModal';
@@ -1972,7 +2107,7 @@ All monitoring systems active and reporting.`;
         window.addEventListener('load', optimizeForScreen);
         window.addEventListener('resize', optimizeForScreen);
         
-        console.log('IDBrainQ Enhanced Enterprise Platform v2.2 Ready - Customer Management System Active');
+        console.log('IDBrainQ Enhanced Enterprise Platform v2.3 Ready - Full Customer Registration System Active');
         console.log('Enhanced Dashboard Version 2.2 - Build:', new Date().toISOString());
         
         // Force page refresh on first load to ensure latest version
