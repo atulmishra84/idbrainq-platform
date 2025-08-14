@@ -238,47 +238,69 @@
         .logout-btn:hover { 
             background: #c82333; 
         }
-        @media (max-width: 1400px) {
-            .stats-container {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 25px;
-            }
+        /* Ultra-wide screens (>2560px) */
+        @media (min-width: 2561px) {
+            .stats-container { grid-template-columns: repeat(6, 1fr); gap: 40px; }
+            .navigation-grid { grid-template-columns: repeat(3, 1fr); gap: 35px; }
+            .content-area { padding: 50px 80px; }
+            .logo { font-size: 64px; }
+            .dashboard-title { font-size: 56px; }
+            .stat-number { font-size: 48px; }
         }
-        @media (max-width: 1000px) {
-            .navigation-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
+        /* Large desktop (1921px - 2560px) */
+        @media (min-width: 1921px) and (max-width: 2560px) {
+            .stats-container { grid-template-columns: repeat(5, 1fr); gap: 35px; }
+            .navigation-grid { grid-template-columns: repeat(3, 1fr); gap: 30px; }
+            .content-area { padding: 45px 70px; }
+            .logo { font-size: 56px; }
+            .dashboard-title { font-size: 50px; }
+            .stat-number { font-size: 42px; }
         }
-        @media (max-width: 768px) {
-            .content-area {
-                padding: 20px;
-            }
-            .logo { font-size: 36px; }
-            .tagline { font-size: 14px; }
-            .form-container { 
-                padding: 30px;
-                margin: 0 10px;
-            }
-            .dashboard-title { font-size: 32px; }
+        /* Standard desktop (1441px - 1920px) */
+        @media (min-width: 1441px) and (max-width: 1920px) {
+            .stats-container { grid-template-columns: repeat(4, 1fr); gap: 30px; }
+            .navigation-grid { grid-template-columns: repeat(2, 1fr); gap: 25px; }
+            .content-area { padding: 40px 60px; }
+        }
+        /* Medium desktop (1201px - 1440px) */
+        @media (min-width: 1201px) and (max-width: 1440px) {
+            .stats-container { grid-template-columns: repeat(4, 1fr); gap: 25px; }
+            .navigation-grid { grid-template-columns: repeat(2, 1fr); gap: 22px; }
+            .content-area { padding: 35px 50px; }
+        }
+        /* Small desktop/large tablet (769px - 1200px) */
+        @media (min-width: 769px) and (max-width: 1200px) {
+            .stats-container { grid-template-columns: repeat(2, 1fr); gap: 25px; }
+            .navigation-grid { grid-template-columns: 1fr; gap: 20px; }
+            .content-area { padding: 30px 40px; }
+            .logo { font-size: 44px; }
+            .dashboard-title { font-size: 38px; }
+        }
+        /* Tablet (481px - 768px) */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .stats-container { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+            .navigation-grid { grid-template-columns: 1fr; gap: 18px; }
+            .content-area { padding: 25px 30px; }
+            .logo { font-size: 40px; }
+            .dashboard-title { font-size: 34px; }
+            .stat-number { font-size: 28px; }
+            .form-container { padding: 35px; margin: 0 15px; }
+        }
+        /* Mobile (320px - 480px) */
+        @media (max-width: 480px) {
+            .stats-container { grid-template-columns: 1fr; gap: 15px; }
+            .navigation-grid { grid-template-columns: 1fr; gap: 15px; }
+            .content-area { padding: 20px 15px; }
+            .logo { font-size: 32px; }
+            .dashboard-title { font-size: 28px; }
             .welcome-text { font-size: 16px; }
-            .stats-container {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            .stat-card {
-                padding: 25px;
-            }
-            .navigation-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            .nav-card {
-                padding: 20px;
-            }
-            .nav-icon { font-size: 24px; margin-right: 15px; }
-            .nav-title { font-size: 15px; }
-            .nav-desc { font-size: 12px; }
+            .stat-number { font-size: 24px; }
+            .stat-label { font-size: 13px; }
+            .nav-card { padding: 18px; }
+            .nav-icon { font-size: 22px; margin-right: 12px; }
+            .nav-title { font-size: 14px; }
+            .nav-desc { font-size: 11px; }
+            .form-container { padding: 25px; margin: 0 10px; }
         }
         @media (max-width: 480px) {
             .content-area {
@@ -535,7 +557,39 @@
             }
         });
         
-        console.log('IDBrainQ Enterprise Platform Ready - Full Screen Mode');
+        // Auto-detect screen resolution and optimize layout
+        function optimizeForScreen() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            const ratio = width / height;
+            
+            console.log(`Screen: ${width}x${height} (${ratio.toFixed(2)}:1)`);
+            
+            // Auto-adjust for ultra-wide monitors
+            if (ratio > 2.5) {
+                document.body.style.setProperty('--ultra-wide', '1');
+                console.log('Ultra-wide monitor detected - optimized layout applied');
+            }
+            
+            // Auto-adjust for very tall screens
+            if (ratio < 1.2) {
+                document.body.style.setProperty('--tall-screen', '1');
+                console.log('Tall screen detected - optimized layout applied');
+            }
+            
+            // Dynamic font scaling based on screen size
+            const baseSize = Math.min(width / 100, height / 50);
+            const scaleFactor = Math.max(0.8, Math.min(1.5, baseSize / 16));
+            document.documentElement.style.fontSize = (16 * scaleFactor) + 'px';
+            
+            console.log(`Font scale factor: ${scaleFactor.toFixed(2)}x`);
+        }
+        
+        // Auto-optimize on load and resize
+        window.addEventListener('load', optimizeForScreen);
+        window.addEventListener('resize', optimizeForScreen);
+        
+        console.log('IDBrainQ Enterprise Platform Ready - Auto Resolution Detection Active');
     </script>
 </body>
 </html>
