@@ -311,6 +311,25 @@
             input { padding: 18px; font-size: 16px; }
             .btn { padding: 18px; font-size: 16px; }
         }
+        
+        /* Single Page Layout Responsive */
+        @media (max-width: 1024px) {
+            .single-page-grid { 
+                grid-template-columns: 1fr !important; 
+                gap: 20px !important; 
+            }
+        }
+        @media (max-width: 768px) {
+            .stats-container { 
+                grid-template-columns: repeat(2, 1fr) !important; 
+                gap: 15px !important; 
+            }
+            .single-page-header {
+                flex-direction: column !important;
+                text-align: center !important;
+                gap: 15px !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -342,30 +361,161 @@
                 </div>
             </div>
 
-            <!-- Dashboard Section -->
+            <!-- Single Page Dashboard -->
             <div id="dashboardSection" class="dashboard">
-                <div class="dashboard-header">
-                    <div class="dashboard-title">🎯 IDBrainQ Enterprise Dashboard</div>
-                    <div class="welcome-text">Welcome back, <span id="userName">Administrator</span>!</div>
-                    <div class="subtitle">Your enterprise identity management platform is fully operational</div>
+                <!-- Header Section -->
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 15px; margin-bottom: 30px; color: white;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                        <div>
+                            <h1 style="margin: 0; font-size: 32px; font-weight: 600;">🔐 IDBrainQ Enterprise Platform</h1>
+                            <p style="margin: 5px 0 0 0; font-size: 18px; opacity: 0.9;">Welcome back, <span id="userName">Administrator</span>!</p>
+                            <p style="margin: 5px 0 0 0; font-size: 14px; opacity: 0.8;">Enterprise Identity Governance & Administration - Fully Operational</p>
+                        </div>
+                        <button class="logout-btn" onclick="performLogout()" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 500; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">Secure Logout</button>
+                    </div>
                 </div>
 
-                <div class="stats-container">
-                    <div class="stat-card">
-                        <div class="stat-number">1,247</div>
-                        <div class="stat-label">Total Identities</div>
+                <!-- Main Content Grid -->
+                <div style="display: grid; grid-template-columns: 1fr 400px; gap: 30px; margin-bottom: 30px;">
+                    <!-- Left Column: Stats and Enterprise Modules -->
+                    <div>
+                        <!-- Performance Stats -->
+                        <div class="stats-container" style="margin-bottom: 30px;">
+                            <div class="stat-card">
+                                <div class="stat-number">1,247</div>
+                                <div class="stat-label">Total Identities</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">892</div>
+                                <div class="stat-label">Active Users</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">23</div>
+                                <div class="stat-label">Risk Alerts</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">156</div>
+                                <div class="stat-label">Compliance Scans</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Enterprise Modules Section -->
+                        <div style="background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 30px;">
+                            <h3 style="margin: 0 0 20px 0; color: #333; font-size: 20px;">🎯 Enterprise Identity Modules</h3>
+                            <div class="navigation-grid" style="grid-template-columns: repeat(2, 1fr); gap: 15px;">
+                                <div class="nav-card" onclick="navigateToModule('authorization-graph')" style="padding: 15px;">
+                                    <div style="display: flex; align-items: center;">
+                                        <div class="nav-icon" style="margin-right: 12px; font-size: 20px;">🔗</div>
+                                        <div>
+                                            <div class="nav-title" style="font-size: 14px;">Authorization Graph</div>
+                                            <div class="nav-desc" style="font-size: 11px;">Visualize access relationships</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="nav-card" onclick="navigateToModule('risk-analytics')" style="padding: 15px;">
+                                    <div style="display: flex; align-items: center;">
+                                        <div class="nav-icon" style="margin-right: 12px; font-size: 20px;">📊</div>
+                                        <div>
+                                            <div class="nav-title" style="font-size: 14px;">Risk Analytics</div>
+                                            <div class="nav-desc" style="font-size: 11px;">AI-powered risk assessment</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="nav-card" onclick="navigateToModule('compliance')" style="padding: 15px;">
+                                    <div style="display: flex; align-items: center;">
+                                        <div class="nav-icon" style="margin-right: 12px; font-size: 20px;">✅</div>
+                                        <div>
+                                            <div class="nav-title" style="font-size: 14px;">Compliance</div>
+                                            <div class="nav-desc" style="font-size: 11px;">SOX, GDPR, HIPAA monitoring</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="nav-card" onclick="navigateToModule('access-pathways')" style="padding: 15px;">
+                                    <div style="display: flex; align-items: center;">
+                                        <div class="nav-icon" style="margin-right: 12px; font-size: 20px;">🛤️</div>
+                                        <div>
+                                            <div class="nav-title" style="font-size: 14px;">Access Pathways</div>
+                                            <div class="nav-desc" style="font-size: 11px;">Analyze access patterns</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="nav-card" onclick="navigateToModule('security-insights')" style="padding: 15px;">
+                                    <div style="display: flex; align-items: center;">
+                                        <div class="nav-icon" style="margin-right: 12px; font-size: 20px;">🔍</div>
+                                        <div>
+                                            <div class="nav-title" style="font-size: 14px;">Security Insights</div>
+                                            <div class="nav-desc" style="font-size: 11px;">ML security recommendations</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="nav-card" onclick="navigateToModule('ai-agents')" style="padding: 15px;">
+                                    <div style="display: flex; align-items: center;">
+                                        <div class="nav-icon" style="margin-right: 12px; font-size: 20px;">🤖</div>
+                                        <div>
+                                            <div class="nav-title" style="font-size: 14px;">AI Agents</div>
+                                            <div class="nav-desc" style="font-size: 11px;">Control AI agent access</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="nav-card" onclick="navigateToModule('identity-lifecycle')" style="padding: 15px;">
+                                    <div style="display: flex; align-items: center;">
+                                        <div class="nav-icon" style="margin-right: 12px; font-size: 20px;">👥</div>
+                                        <div>
+                                            <div class="nav-title" style="font-size: 14px;">Identity Lifecycle</div>
+                                            <div class="nav-desc" style="font-size: 11px;">Complete identity workflows</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="nav-card" onclick="navigateToModule('integrations')" style="padding: 15px;">
+                                    <div style="display: flex; align-items: center;">
+                                        <div class="nav-icon" style="margin-right: 12px; font-size: 20px;">🔧</div>
+                                        <div>
+                                            <div class="nav-title" style="font-size: 14px;">Integrations</div>
+                                            <div class="nav-desc" style="font-size: 11px;">150+ enterprise connectors</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-number">892</div>
-                        <div class="stat-label">Active Users</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">23</div>
-                        <div class="stat-label">Risk Alerts</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">156</div>
-                        <div class="stat-label">Compliance Scans</div>
+                    
+                    <!-- Right Column: Customer Success Center -->
+                    <div>
+                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 25px; border-radius: 15px; color: white; box-shadow: 0 10px 30px rgba(0,0,0,0.1); height: fit-content;">
+                            <h3 style="margin: 0 0 20px 0; font-size: 20px; text-align: center;">Customer Success Center</h3>
+                            
+                            <!-- Success Metrics -->
+                            <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; backdrop-filter: blur(10px); margin-bottom: 20px;">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; text-align: center; font-size: 14px;">
+                                    <div>
+                                        <div style="font-size: 18px; font-weight: bold;">$847K</div>
+                                        <div style="opacity: 0.8;">Monthly Revenue</div>
+                                    </div>
+                                    <div>
+                                        <div style="font-size: 18px; font-weight: bold;">47+</div>
+                                        <div style="opacity: 0.8;">Customers</div>
+                                    </div>
+                                    <div>
+                                        <div style="font-size: 18px; font-weight: bold;">98.5%</div>
+                                        <div style="opacity: 0.8;">Retention</div>
+                                    </div>
+                                    <div>
+                                        <div style="font-size: 18px; font-weight: bold;">4.8/5</div>
+                                        <div style="opacity: 0.8;">Satisfaction</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Action Buttons -->
+                            <div style="display: grid; gap: 12px;">
+                                <button onclick="startCustomerOnboarding()" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 15px; border-radius: 10px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; text-align: center;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
+                                    🚀 New Customer Onboarding
+                                </button>
+                                <button onclick="viewCustomerPortal()" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 15px; border-radius: 10px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; text-align: center;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
+                                    📊 Customer Management
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
